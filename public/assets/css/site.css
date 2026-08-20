@@ -368,6 +368,10 @@ footer{background:var(--pine-deep); color:var(--sand-dim); border-top:1px solid 
 
 ::selection{background:var(--brass); color:var(--ink-inverse);}
 .sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);}
+/* The `hidden` attribute must win over any class that sets a display value —
+   otherwise .btn, .consent and friends stay visible when JS hides them. */
+[hidden]{display:none !important;}
+
 
 /* ==========================================================================
    Rebuild additions
@@ -547,7 +551,6 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
 /* gallery filter fade — end states match the reference exactly */
 .masonry-item{transition:opacity var(--dur) ease;}
 .masonry-item.is-hiding{opacity:0;}
-.masonry-item[hidden]{display:none;}
 
 /* header variants */
 .mobile-wordmark{color:var(--paper-soft);}

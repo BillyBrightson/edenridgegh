@@ -443,6 +443,47 @@ $router->get('/media', static function (): void {
     ]);
 });
 
+/**
+ * Serve the generated image files.
+ *
+ * The dashboard has its own document root (admin/public), so the /media/… URLs
+ * that Media::url() hands to <img> tags never reach the public site's
+ * public/media directory on their own — without this route every thumbnail in
+ * the dashboard falls through to the login redirect and renders broken.
+ */
+$router->get('/media/{file}', static function (array $args): void {
+    $types = [
+        'jpg'  => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'png'  => 'image/png',
+        'webp' => 'image/webp',
+        'svg'  => 'image/svg+xml',
+    ];
+    $name = basename((string)$args['file']);
+    $ext  = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+    $dir  = realpath(ImageProcessor::mediaDir());
+    $path = $dir ? realpath($dir . '/' . $name) : false;
+
+    if (!isset($types[$ext]) || $path === false || !is_file($path) || !str_starts_with($path, $dir . '/')) {
+        http_response_code(404);
+        header('Content-Type: text/plain; charset=utf-8');
+        echo 'Not found';
+        exit;
+    }
+
+    $etag = '"' . md5($name . '-' . filemtime($path) . '-' . filesize($path)) . '"';
+    header('Content-Type: ' . $types[$ext]);
+    header('Cache-Control: private, max-age=604800');
+    header('ETag: ' . $etag);
+    if (trim((string)($_SERVER['HTTP_IF_NONE_MATCH'] ?? '')) === $etag) {
+        http_response_code(304);
+        exit;
+    }
+    header('Content-Length: ' . filesize($path));
+    readfile($path);
+    exit;
+});
+
 $router->get('/media/picker', static function (): void {
     Auth::requireAbility('edit_content');
     echo View::render('admin/partials/media_grid', [
@@ -667,19 +708,35 @@ $router->post('/settings', static function (): void {
         'cookie_consent_text', 'turnstile_site_key', 'turnstile_secret',
         'maintenance_message', 'whatsapp_webhook_url', 'robots_txt',
     ];
+    // Only touch fields the form actually submitted: a partial post (an
+    // interrupted upload, a future partial form) must never wipe settings it
+    // never showed. Clearing a field still posts an empty string.
     foreach ($strings as $key) {
-        Settings::set($key, (string)post($key));
+        if (array_key_exists($key, $_POST)) {
+            Settings::set($key, (string)post($key));
+        }
     }
     foreach (array_keys(Icons::socialOptions()) as $platform) {
-        Settings::set('social_' . $platform . '_handle', \Core\Sanitizer::text((string)post('social_' . $platform . '_handle')));
-        Settings::set('social_' . $platform . '_url', \Core\Schema::safeLink((string)post('social_' . $platform . '_url')));
+        $handleKey = 'social_' . $platform . '_handle';
+        $urlKey    = 'social_' . $platform . '_url';
+        if (array_key_exists($handleKey, $_POST)) {
+            Settings::set($handleKey, \Core\Sanitizer::text((string)post($handleKey)));
+        }
+        if (array_key_exists($urlKey, $_POST)) {
+            Settings::set($urlKey, \Core\Schema::safeLink((string)post($urlKey)));
+        }
     }
-    Settings::set('smtp_port', (int)post('smtp_port', 587), 'int');
+    if (array_key_exists('smtp_port', $_POST)) {
+        Settings::set('smtp_port', (int)post('smtp_port', 587), 'int');
+    }
     if ((string)post('smtp_password') !== '') {
         Settings::set('smtp_password', (string)post('smtp_password'));
     }
+    // Toggles always post, thanks to the hidden 0 companion input.
     foreach (['autoreply_enabled', 'cookie_consent_enabled', 'maintenance_mode', 'cache_enabled', 'auto_backup_enabled'] as $flag) {
-        Settings::set($flag, post($flag) === '1', 'bool');
+        if (array_key_exists($flag, $_POST)) {
+            Settings::set($flag, post($flag) === '1', 'bool');
+        }
     }
     Cache::flush();
     Activity::log(Auth::id(), 'settings.save', null, null, ['group' => 'site']);
