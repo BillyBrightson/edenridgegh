@@ -1,0 +1,63 @@
+{
+  "site_name":            { "value": "Eden Ridge", "type": "string" },
+  "tagline":              { "value": "A gated collection of contemporary four-bedroom residences in Community 25, Tema, Greater Accra.", "type": "string" },
+  "logo_media_id":        { "value": "", "type": "string" },
+  "favicon_media_id":     { "value": "", "type": "string" },
+
+  "contact_phone":        { "value": "+1 (404) 931-7171", "type": "string" },
+  "contact_whatsapp":     { "value": "+1 (404) 931-7171", "type": "string" },
+  "contact_email":        { "value": "edbenson11@outlook.com", "type": "string" },
+  "contact_address":      { "value": "Community 25, Tema, Greater Accra, Ghana", "type": "string" },
+
+  "social_instagram_handle": { "value": "@edenridgegh", "type": "string" },
+  "social_instagram_url":    { "value": "", "type": "string" },
+  "social_facebook_handle":  { "value": "@edenridgegh", "type": "string" },
+  "social_facebook_url":     { "value": "", "type": "string" },
+  "social_x_handle":         { "value": "@edenridgegh", "type": "string" },
+  "social_x_url":            { "value": "", "type": "string" },
+  "social_tiktok_handle":    { "value": "@edenridgegh", "type": "string" },
+  "social_tiktok_url":       { "value": "", "type": "string" },
+  "social_linkedin_handle":  { "value": "@edenridgegh", "type": "string" },
+  "social_linkedin_url":     { "value": "", "type": "string" },
+  "social_youtube_handle":   { "value": "@edenridgegh", "type": "string" },
+  "social_youtube_url":      { "value": "", "type": "string" },
+
+  "notification_emails":  { "value": "edbenson11@outlook.com", "type": "string" },
+  "autoreply_enabled":    { "value": "1", "type": "bool" },
+  "autoreply_subject":    { "value": "Thank you for your interest in Eden Ridge", "type": "string" },
+  "autoreply_body":       { "value": "Dear {{name}},\n\nThank you for registering your interest in Eden Ridge — our gated collection of contemporary four-bedroom residences in Community 25, Tema.\n\nWe have received your enquiry regarding {{interest}} and a member of our sales team will be in touch within one business day.\n\nIn the meantime, feel free to reply to this email with any questions about the residence, the payment structure, or arranging a private viewing.\n\nWarm regards,\nThe Eden Ridge Sales Team", "type": "string" },
+
+  "smtp_transport":       { "value": "smtp", "type": "string" },
+  "smtp_host":            { "value": "", "type": "string" },
+  "smtp_port":            { "value": "587", "type": "int" },
+  "smtp_encryption":      { "value": "tls", "type": "string" },
+  "smtp_username":        { "value": "", "type": "string" },
+  "smtp_password":        { "value": "", "type": "string" },
+  "smtp_from_email":      { "value": "no-reply@edenridgegh.com", "type": "string" },
+  "smtp_from_name":       { "value": "Eden Ridge", "type": "string" },
+
+  "ga4_id":               { "value": "", "type": "string" },
+  "meta_pixel_id":        { "value": "", "type": "string" },
+  "cookie_consent_enabled": { "value": "0", "type": "bool" },
+  "cookie_consent_text":  { "value": "We use cookies to understand how visitors use this site. You can accept or decline analytics cookies.", "type": "string" },
+
+  "turnstile_site_key":   { "value": "", "type": "string" },
+  "turnstile_secret":     { "value": "", "type": "string" },
+
+  "maintenance_mode":     { "value": "0", "type": "bool" },
+  "maintenance_message":  { "value": "Eden Ridge is briefly offline for updates. Please check back shortly.", "type": "string" },
+  "cache_enabled":        { "value": "1", "type": "bool" },
+  "auto_backup_enabled":  { "value": "1", "type": "bool" },
+  "last_auto_backup":     { "value": "", "type": "string" },
+
+  "whatsapp_webhook_url": { "value": "", "type": "string" },
+
+  "video_gate_enabled":   { "value": "1", "type": "bool" },
+  "video_provider":       { "value": "youtube", "type": "string" },
+  "video_url":            { "value": "", "type": "string" },
+  "video_poster_media_id":{ "value": "", "type": "string" },
+  "video_email_body":     { "value": "Dear {{name}},\n\nThank you for requesting the Eden Ridge video walkthrough. You can watch the full tour here:\n\n{{video_url}}\n\nIf you would like to arrange a private viewing or discuss the payment structure, simply reply to this email.\n\nWarm regards,\nThe Eden Ridge Sales Team", "type": "string" },
+
+  "robots_txt":           { "value": "", "type": "string" },
+  "brand_colors":         { "value": "{}", "type": "json" }
+}

@@ -1,0 +1,23 @@
+{
+  "categories": [
+    { "slug": "exterior", "label": "Exterior", "sort_order": 1 },
+    { "slug": "living", "label": "Living", "sort_order": 2 },
+    { "slug": "kitchen", "label": "Kitchen & Dining", "sort_order": 3 },
+    { "slug": "bed", "label": "Bed & Bath", "sort_order": 4 },
+    { "slug": "outdoor", "label": "Wardrobe & Terrace", "sort_order": 5 }
+  ],
+  "items": [
+    { "file": "7b37227a-hero-exterior.jpg", "category": "exterior", "caption": "Exterior — Street View" },
+    { "file": "b3030938-living-staircase.jpg", "category": "living", "caption": "Living Room" },
+    { "file": "c1a883ed-kitchen-designer.jpg", "category": "kitchen", "caption": "Designer Kitchen" },
+    { "file": "11ad3a93-exterior-forecourt.jpg", "category": "exterior", "caption": "Exterior — Forecourt" },
+    { "file": "a9bd2d93-primary-bathroom.jpg", "category": "bed", "caption": "Primary Bathroom" },
+    { "file": "9b322001-dining-room.jpg", "category": "kitchen", "caption": "Dining Room" },
+    { "file": "879bc839-master-bedroom.jpg", "category": "bed", "caption": "Master Bedroom" },
+    { "file": "ebcd5a37-living-flow.jpg", "category": "living", "caption": "Living Room — Flow" },
+    { "file": "846a0995-private-terrace.jpg", "category": "outdoor", "caption": "Private Terrace" },
+    { "file": "1898322b-walk-in-wardrobe.jpg", "category": "outdoor", "caption": "Walk-In Wardrobe" },
+    { "file": "4fbdeee0-facade-balcony.jpg", "category": "exterior", "caption": "Facade Detail" },
+    { "file": "4065aa9b-community-grounds.jpg", "category": "exterior", "caption": "Community Grounds" }
+  ]
+}

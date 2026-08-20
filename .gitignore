@@ -1,0 +1,20 @@
+# Generated at install time — never committed.
+config.php
+
+# The database and everything the app writes at runtime.
+storage/db/*.sqlite
+storage/db/*.sqlite-shm
+storage/db/*.sqlite-wal
+storage/cache/*
+storage/logs/*
+storage/backups/*
+!storage/*/.gitkeep
+
+# Image derivatives are regenerated from storage/uploads on install.
+public/media/*
+!public/media/.gitkeep
+
+# Working copy of the reference build used during Phase 0 extraction.
+.ref/
+
+.DS_Store

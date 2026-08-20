@@ -1,0 +1,28 @@
+{
+    "name": "edenridge/website",
+    "description": "Eden Ridge marketing site and client dashboard — PHP + SQLite, no runtime dependencies.",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_sqlite": "*",
+        "ext-gd": "*",
+        "ext-fileinfo": "*",
+        "ext-mbstring": "*",
+        "ext-json": "*",
+        "ext-dom": "*"
+    },
+    "suggest": {
+        "ext-zip": "Needed for the backup and restore tools",
+        "ext-exif": "Respects EXIF orientation when generating image derivatives"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "core/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}
