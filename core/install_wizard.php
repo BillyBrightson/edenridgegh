@@ -17,10 +17,10 @@ $checks = [
     'mbstring extension'      => [extension_loaded('mbstring'), extension_loaded('mbstring') ? 'available' : 'missing'],
     'ZipArchive (backups)'    => [class_exists(ZipArchive::class), class_exists(ZipArchive::class) ? 'available' : 'backups disabled'],
     'storage/ writable'       => [is_writable(APP_ROOT . '/storage'), APP_ROOT . '/storage'],
-    'public/media/ writable'  => [is_writable(APP_ROOT . '/public/media') || @mkdir(APP_ROOT . '/public/media', 0755, true), APP_ROOT . '/public/media'],
+    'media folder writable'   => [is_writable(PUBLIC_PATH . '/media') || @mkdir(PUBLIC_PATH . '/media', 0755, true), PUBLIC_PATH . '/media'],
     'app root writable'       => [is_writable(APP_ROOT), 'needed once, to write config.php'],
 ];
-$required = ['PHP 8.1 or newer', 'PDO SQLite driver', 'GD image library', 'fileinfo extension', 'mbstring extension', 'storage/ writable', 'public/media/ writable', 'app root writable'];
+$required = ['PHP 8.1 or newer', 'PDO SQLite driver', 'GD image library', 'fileinfo extension', 'mbstring extension', 'storage/ writable', 'media folder writable', 'app root writable'];
 $blocked  = false;
 foreach ($required as $key) {
     if (!$checks[$key][0]) {
@@ -39,6 +39,10 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && !$blocked) {
     $email    = strtolower(trim((string)($_POST['admin_email'] ?? '')));
     $password = (string)($_POST['admin_password'] ?? '');
     $confirm  = (string)($_POST['admin_password_confirm'] ?? '');
+    // Where the public site's document root lives on disk. Auto-detected when
+    // the installer is opened on the public host; typed in otherwise, because
+    // image derivatives are written there and the path is not guessable.
+    $publicPath = rtrim(trim((string)($_POST['public_path'] ?? '')), '/') ?: PUBLIC_PATH;
 
     if (!filter_var($siteUrl, FILTER_VALIDATE_URL)) {
         $errors[] = 'Enter the full public site URL, including https://';
@@ -51,6 +55,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && !$blocked) {
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Enter a valid email address.';
+    }
+    if (!is_dir($publicPath)) {
+        $errors[] = 'The public site directory does not exist: ' . $publicPath;
     }
     if (strlen($password) < 10) {
         $errors[] = 'Choose a password of at least 10 characters.';
@@ -68,6 +75,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && !$blocked) {
                 'debug'     => false,
                 'app_key'   => bin2hex(random_bytes(32)),
                 'db_path'   => APP_ROOT . '/storage/db/edenridge.sqlite',
+                'public_path' => $publicPath,
+                'admin_public_path' => defined('ADMIN_PUBLIC_ROOT') ? ADMIN_PUBLIC_ROOT : APP_ROOT . '/admin/public',
                 'mail'      => [
                     'transport'  => 'smtp',
                     'host'       => trim((string)($_POST['smtp_host'] ?? '')),

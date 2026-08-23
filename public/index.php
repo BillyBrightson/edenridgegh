@@ -6,17 +6,35 @@ declare(strict_types=1);
  * Document root: this directory. Everything else lives above it.
  */
 
+// Tell the app where this document root lives. On shared hosting the two
+// docroots are often siblings of the app root rather than folders inside it.
+define('PUBLIC_ROOT', __DIR__);
+
 require dirname(__DIR__) . '/core/bootstrap.php';
 
 use Core\{Cache, Config, Content, Csrf, Enquiry, Logger, Mailer, Router, Schema, Seo, Session, Settings, Video, View};
 
 if (!Config::installed()) {
-    http_response_code(503);
-    echo View::render('pages/error', [
-        'code' => 503,
-        'title' => 'Not installed yet',
-        'message' => 'Run the installer at ' . e((string)Config::get('admin_url', '/admin')) . '/install to finish setting up this site.',
-    ]);
+    // The dashboard lives on a subdomain, and a subdomain has to be created in
+    // the hosting panel — which can lag behind the main site going up. So the
+    // installer answers on either host while the app is unconfigured, and
+    // disappears from both the moment config.php exists.
+    header('X-Robots-Tag: noindex, nofollow');
+    header('X-Content-Type-Options: nosniff');
+    Session::start('eden_public');
+
+    $setup = new Router();
+    $setup->any('/install', static fn() => require APP_ROOT . '/core/install_wizard.php');
+    $setup->fallback(static function (): void {
+        http_response_code(503);
+        header('Retry-After: 3600');
+        echo View::render('pages/error', [
+            'code'    => 503,
+            'title'   => 'Not installed yet',
+            'message' => 'Open /install to finish setting up this site.',
+        ]);
+    });
+    $setup->dispatch();
     exit;
 }
 

@@ -22,6 +22,21 @@ spl_autoload_register(static function (string $class): void {
 
 \Core\Config::load();
 
+/**
+ * Absolute paths to the two document roots.
+ *
+ * A front controller knows its own location; the other one comes from
+ * config.php, which the installer fills in. Both fall back to the in-repo
+ * layout, which is what a standard two-docroot deployment uses.
+ */
+define('PUBLIC_PATH', defined('PUBLIC_ROOT')
+    ? PUBLIC_ROOT
+    : ((string)\Core\Config::get('public_path', '') ?: APP_ROOT . '/public'));
+
+define('ADMIN_PUBLIC_PATH', defined('ADMIN_PUBLIC_ROOT')
+    ? ADMIN_PUBLIC_ROOT
+    : ((string)\Core\Config::get('admin_public_path', '') ?: APP_ROOT . '/admin/public'));
+
 mb_internal_encoding('UTF-8');
 date_default_timezone_set('UTC');
 

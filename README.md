@@ -64,7 +64,8 @@ edenridge/                     <- app root, NOT web accessible
    `~/public_html/app` → `admin/public`, or serve the dashboard from
    `edenridgegh.com/admin` with an Apache alias — the router does not care which.
 4. Make `storage/` writable (`0755`) and confirm `public/media/` is writable.
-5. Visit `https://app.edenridgegh.com/install` and complete the one-page wizard:
+5. Visit `https://app.edenridgegh.com/install` — or `https://edenridgegh.com/install`, since the
+   installer answers on either host until it is done — and complete the one-page wizard:
    environment check → URLs → your admin account → optional SMTP.
    It creates the database, runs the migrations, seeds all the reference content
    and images, then locks itself.
@@ -73,6 +74,36 @@ edenridge/                     <- app root, NOT web accessible
 `config.php` is written by the installer at the app root with mode `0600` and is
 never served. Both document roots force HTTPS and send their security headers
 from `.htaccess` and PHP.
+
+### Hosts that serve each domain from its own folder (DreamHost and similar)
+
+Some hosts give every domain a directory in the account home — `~/example.com/`
+— and serve that directory. The home directory itself is not a document root,
+which makes this the *best* layout for this app: the application root sits
+beside the sites rather than inside one.
+
+```
+/home/<user>/
+├── edenridge/              <- app root; no domain points here
+│   ├── core/  views/  content/
+│   └── storage/            <- database, uploads, cache, logs
+├── edenridgegh.com/        <- contents of public/
+└── app.edenridgegh.com/    <- contents of admin/public/
+```
+
+Both front controllers then need the same one-line edit:
+
+```php
+require dirname(__DIR__) . '/edenridge/core/bootstrap.php';
+```
+
+Delete the two `router.php` files (built-in server only) and open
+`/install` on either host. The installer records the document root paths in
+`config.php`, so the dashboard knows where to write image derivatives even
+though it runs on a different hostname.
+
+`deploy/app-root.htaccess.txt` is **not** needed here — the app root is already
+outside every document root.
 
 ### Deploying with FTP only
 

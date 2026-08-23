@@ -14,7 +14,9 @@ use Core\Csrf;
     <li><?= (int)($counts['gallery'] ?? 0) ?> gallery items</li>
     <li><?= (int)($counts['settings'] ?? 0) ?> settings</li>
   </ul>
-  <a class="btn btn-primary" href="/login" style="width:100%;justify-content:center;margin-top:14px;">Go to the dashboard</a>
+  <?php $dashboard = rtrim((string)\Core\Config::get('admin_url', ''), '/') . '/login'; ?>
+  <a class="btn btn-primary" href="<?= e($dashboard) ?>" style="width:100%;justify-content:center;margin-top:14px;">Go to the dashboard</a>
+  <p class="hint" style="margin-top:10px;">If the dashboard subdomain is not live yet, the public site already works — come back to that link once it is.</p>
   <p class="hint" style="margin-top:16px;">Delete nothing — this installer locks itself automatically now that <code>config.php</code> exists.</p>
 <?php else: ?>
   <h1>Install Eden Ridge</h1>
@@ -51,6 +53,13 @@ use Core\Csrf;
         <label class="field-label" for="admin_url">Dashboard URL</label>
         <input type="url" id="admin_url" name="admin_url" value="<?= e((string)($_POST['admin_url'] ?? 'https://app.edenridgegh.com')) ?>" required>
       </div>
+      <?php if (!defined('PUBLIC_ROOT')): ?>
+        <div class="field">
+          <label class="field-label" for="public_path">Public site directory</label>
+          <p class="hint">The folder on disk that <code>edenridgegh.com</code> serves. Generated image sizes are written there.</p>
+          <input type="text" id="public_path" name="public_path" value="<?= e((string)($_POST['public_path'] ?? PUBLIC_PATH)) ?>" required>
+        </div>
+      <?php endif; ?>
       <div class="field">
         <label class="field-label" for="admin_name">Your name</label>
         <input type="text" id="admin_name" name="admin_name" value="<?= e((string)($_POST['admin_name'] ?? '')) ?>" required>

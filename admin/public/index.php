@@ -6,6 +6,8 @@ declare(strict_types=1);
  * Document root: this directory.
  */
 
+define('ADMIN_PUBLIC_ROOT', __DIR__);
+
 require dirname(__DIR__, 2) . '/core/bootstrap.php';
 
 use Core\{Activity, Auth, Backup, Cache, Config, Content, Csrf, DB, Enquiry, Gallery, Icons,

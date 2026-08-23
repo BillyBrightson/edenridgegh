@@ -405,7 +405,9 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
 .band-scrim{position:absolute; inset:0; background:var(--band-scrim);}
 .band-inner{position:relative; z-index:2; text-align:center; padding:100px 0;}
 .band-inner .eyebrow{display:flex; justify-content:center;}
-.band h2{margin-top:18px; font-size:var(--fs-h2-band);}
+/* The band sits over a photograph, so the headline needs the same light ink
+   the hero uses — without a colour it inherits --ink from body and disappears. */
+.band h2{margin-top:18px; font-size:var(--fs-h2-band); color:var(--paper-bright);}
 .band p{max-width:680px; margin:24px auto 0; color:var(--sand); font-size:var(--fs-lede); line-height:1.85;}
 
 /* ---- investment ---- */

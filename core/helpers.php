@@ -136,14 +136,14 @@ function wants_json(): bool
 /** Versioned asset URL — busts caches on deploy without manual renaming. */
 function asset(string $path): string
 {
-    $abs = APP_ROOT . '/public' . $path;
+    $abs = PUBLIC_PATH . $path;
     $v   = is_file($abs) ? (string)filemtime($abs) : '1';
     return $path . '?v=' . $v;
 }
 
 function admin_asset(string $path): string
 {
-    $abs = APP_ROOT . '/admin/public' . $path;
+    $abs = ADMIN_PUBLIC_PATH . $path;
     $v   = is_file($abs) ? (string)filemtime($abs) : '1';
     return $path . '?v=' . $v;
 }
