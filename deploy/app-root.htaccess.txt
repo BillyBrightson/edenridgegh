@@ -1,0 +1,23 @@
+# ---------------------------------------------------------------------------
+# Rename this file to `.htaccess` ONLY in the FTP single-docroot deployment,
+# and place it in the application root — the folder holding core/, views/,
+# content/, storage/ and config.php — when that folder has to live *inside*
+# public_html because the host will not let you set a document root.
+#
+# It stops config.php (which carries the app key and the SMTP password) and
+# composer.json from being served if PHP ever stops executing, for example
+# during a PHP version switch.
+#
+# Do NOT add it to the application root in the standard two-docroot
+# deployment. There the app root sits above both document roots, where Apache
+# applies AllowOverride None — and any directive in an .htaccess file at that
+# position makes Apache return 500 for the entire site. Verified against
+# Apache 2.4.66.
+# ---------------------------------------------------------------------------
+
+Require all denied
+
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>

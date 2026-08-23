@@ -5,6 +5,10 @@
 #   location ~* \.(webp|jpg|jpeg|png|svg|css|js|woff2)$ { expires 1y; add_header Cache-Control "public, immutable"; }
 #   location ~ /\.(?!well-known) { deny all; }
 
+# This directory is a document root, so re-grant access explicitly: it may sit
+# below an application root that denies everything (see /.htaccess).
+Require all granted
+
 Options -Indexes -MultiViews
 DirectoryIndex index.php
 

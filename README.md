@@ -74,6 +74,56 @@ edenridge/                     <- app root, NOT web accessible
 never served. Both document roots force HTTPS and send their security headers
 from `.htaccess` and PHP.
 
+### Deploying with FTP only
+
+FTP is enough to move the files, but it cannot create a subdomain or set a
+document root — those are DNS and vhost operations. What you need from the
+control panel (or a one-line request to the host) is exactly one thing:
+**`app.edenridgegh.com` must exist and resolve to a folder you can reach over
+FTP.** On cPanel that folder defaults to `public_html/app`. Everything else can
+be done with an FTP client.
+
+Upload into this shape:
+
+```
+public_html/                 <- edenridgegh.com
+├── (contents of public/)
+├── app/                     <- app.edenridgegh.com
+│   └── (contents of admin/public/)
+└── _eden/                   <- app root: NOT a document root
+    ├── core/  views/  content/
+    ├── storage/             <- chmod 755, plus storage/uploads
+    └── .htaccess            <- deploy/app-root.htaccess.txt, renamed
+```
+
+Then edit two lines so the front controllers can find the relocated app root:
+
+| File | Change |
+|---|---|
+| `public_html/index.php` | `require __DIR__ . '/_eden/core/bootstrap.php';` |
+| `public_html/app/index.php` | `require dirname(__DIR__) . '/_eden/core/bootstrap.php';` |
+
+Delete both `router.php` files (they are only for PHP's built-in server), then
+visit `https://app.edenridgegh.com/install`.
+
+Because the app root sits inside `public_html` here, its own deny-all
+`.htaccess` is the only thing keeping `config.php` — which holds the app key and
+the SMTP password — from being served if PHP ever stops executing. Renaming
+`deploy/app-root.htaccess.txt` into place is not optional in this layout.
+Verified against Apache 2.4: with the file present every path under `_eden/`
+returns 403 while both sites serve normally.
+
+**Do not** put that file in the app root of the standard two-docroot layout.
+There the app root is above both document roots, where Apache applies
+`AllowOverride None`, and any directive in an `.htaccess` at that position makes
+Apache return 500 for the whole site.
+
+**Without a subdomain at all**, the dashboard would have to run from a
+subdirectory such as `edenridgegh.com/admin`. That does not work today: roughly
+forty internal links, form actions and `fetch()` calls are root-relative, so
+they would resolve above the subdirectory. Supporting it needs a base-path
+change to the router and the templates.
+
 ### Local development
 
 ```sh

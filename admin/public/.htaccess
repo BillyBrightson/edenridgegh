@@ -4,6 +4,10 @@
 #   location / { try_files $uri $uri/ /index.php?$query_string; }
 #   add_header X-Robots-Tag "noindex, nofollow" always;
 
+# This directory is a document root, so re-grant access explicitly: it may sit
+# below an application root that denies everything (see /.htaccess).
+Require all granted
+
 Options -Indexes -MultiViews
 DirectoryIndex index.php
 
