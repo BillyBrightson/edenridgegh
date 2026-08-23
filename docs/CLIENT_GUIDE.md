@@ -179,7 +179,17 @@ and a safety backup is taken first, just in case.
 
 ---
 
-## 8. Two things worth changing before launch
+## 8. Showing the site privately before launch
+
+**Site settings → Maintenance mode** puts a branded holding page in front of
+visitors. Just below it is a **private preview link** — open that once in your
+browser and you see the real site for the next twelve hours, while everyone
+else still gets the holding page. Send it to anyone who needs to review the
+site before it goes public.
+
+Switch maintenance mode off when you are ready to launch.
+
+## 9. Two things worth changing before launch
 
 Both are inherited from the original build and are already editable:
 

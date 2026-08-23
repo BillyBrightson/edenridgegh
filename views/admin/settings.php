@@ -149,6 +149,14 @@ use Core\{Csrf, Icons, Settings};
           <span class="track"></span><span>Maintenance mode — show a holding page to visitors</span>
         </label>
       </div>
+      <?php $previewToken = (string)Settings::get('maintenance_bypass_token', ''); ?>
+      <?php if ($previewToken !== ''): ?>
+        <div class="field">
+          <span class="field-label">Private preview link</span>
+          <p class="hint">Opens the real site even while the holding page is up, for this browser, for twelve hours. Share it only with people reviewing the site.</p>
+          <input type="text" readonly onclick="this.select()" value="<?= e(rtrim((string)\Core\Config::get('site_url', ''), '/') . '/?preview=' . $previewToken) ?>">
+        </div>
+      <?php endif; ?>
       <div class="field">
         <label class="field-label" for="maintenance_message">Holding page message</label>
         <textarea id="maintenance_message" name="maintenance_message" rows="2"><?= e((string)Settings::get('maintenance_message', '')) ?></textarea>

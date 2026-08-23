@@ -46,6 +46,7 @@
 
   "maintenance_mode":     { "value": "0", "type": "bool" },
   "maintenance_message":  { "value": "Eden Ridge is briefly offline for updates. Please check back shortly.", "type": "string" },
+  "maintenance_bypass_token": { "value": "", "type": "string" },
   "cache_enabled":        { "value": "1", "type": "bool" },
   "auto_backup_enabled":  { "value": "1", "type": "bool" },
   "last_auto_backup":     { "value": "", "type": "string" },

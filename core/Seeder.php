@@ -100,6 +100,11 @@ final class Seeder
             ]);
             $counts['settings']++;
         }
+        // A random preview token, so the holding page can always be bypassed
+        // by someone who has the link.
+        if ((string)Settings::get('maintenance_bypass_token', '') === '') {
+            Settings::set('maintenance_bypass_token', bin2hex(random_bytes(16)));
+        }
         Settings::flush();
     }
 

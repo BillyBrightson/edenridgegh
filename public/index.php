@@ -100,11 +100,39 @@ function csp(): string
 // ------------------------------------------------------- maintenance mode
 Session::start('eden_public');
 $path = Router::currentPath();
-if (Settings::bool('maintenance_mode', false) && !str_starts_with($path, '/media')) {
+if (Settings::bool('maintenance_mode', false) && !str_starts_with($path, '/media') && !previewAllowed()) {
     http_response_code(503);
     header('Retry-After: 3600');
     echo View::render('pages/maintenance');
     exit;
+}
+
+/**
+ * Private preview while the holding page is up.
+ *
+ * The dashboard runs on its own hostname, so its session cookie never reaches
+ * this one — an "admins pass through" rule cannot work here. Instead a secret
+ * token in the URL (Site settings → the preview link) drops a cookie that lets
+ * that one browser through for twelve hours.
+ */
+function previewAllowed(): bool
+{
+    $token = (string)Settings::get('maintenance_bypass_token', '');
+    if ($token === '') {
+        return false;
+    }
+    $given = (string)($_GET['preview'] ?? '');
+    if ($given !== '' && hash_equals($token, $given)) {
+        setcookie('eden_preview', $token, [
+            'expires'  => time() + 43200,
+            'path'     => '/',
+            'secure'   => Session::isHttps(),
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
+        return true;
+    }
+    return hash_equals($token, (string)($_COOKIE['eden_preview'] ?? ''));
 }
 
 // Housekeeping that would otherwise need a cron: retry queued mail,

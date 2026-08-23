@@ -251,7 +251,10 @@ every response.
   UTC, seven days retained. Restore is admin-only, takes a typed confirmation,
   and snapshots the current state first.
 - **Logs** — `storage/logs/app.log`, rotated at 2 MB, five files kept.
-- **Maintenance mode** — a branded holding page for visitors; signed-in admins pass through.
+- **Maintenance mode** — a branded holding page for visitors, with a secret
+  preview link (Site settings) that lets reviewers see the real site. The
+  dashboard is on a different hostname, so its session cookie cannot reach the
+  public site; a token in the URL is what actually works.
 
 Housekeeping that would normally need cron (mail retries, trash pruning, the
 nightly backup) runs in a shutdown handler on public requests, so nothing
