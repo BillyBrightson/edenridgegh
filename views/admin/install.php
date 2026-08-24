@@ -56,8 +56,20 @@ use Core\Csrf;
       <?php if (!defined('PUBLIC_ROOT')): ?>
         <div class="field">
           <label class="field-label" for="public_path">Public site directory</label>
-          <p class="hint">The folder on disk that <code>edenridgegh.com</code> serves. Generated image sizes are written there.</p>
-          <input type="text" id="public_path" name="public_path" value="<?= e((string)($_POST['public_path'] ?? PUBLIC_PATH)) ?>" required>
+          <p class="hint">The folder on disk that the public site serves — the one containing its <code>index.php</code>. Every generated image size is written there, so getting this wrong means a site with no images.</p>
+          <?php
+          // Guess the sibling folder named after the public hostname, which is
+          // the convention on hosts that serve each domain from its own
+          // directory. Fall back to the in-repo layout only if that exists.
+          $guess = (string)($_POST['public_path'] ?? '');
+          if ($guess === '') {
+              $host = parse_url((string)($_POST['site_url'] ?? 'https://edenridgegh.com'), PHP_URL_HOST) ?: '';
+              foreach ([dirname(APP_ROOT) . '/' . $host, APP_ROOT . '/public'] as $candidate) {
+                  if ($host !== '' && is_file($candidate . '/index.php')) { $guess = $candidate; break; }
+              }
+          }
+          ?>
+          <input type="text" id="public_path" name="public_path" value="<?= e($guess) ?>" placeholder="/home/user/edenridgegh.com" required>
         </div>
       <?php endif; ?>
       <div class="field">

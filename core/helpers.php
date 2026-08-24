@@ -133,17 +133,45 @@ function wants_json(): bool
     return $xhr || str_contains($accept, 'application/json');
 }
 
+/**
+ * Absolute path to the public site's document root.
+ *
+ * Resolved on every call rather than once at boot: the installer writes this
+ * path into config.php mid-request, and a constant fixed beforehand would send
+ * every generated image to a folder no domain serves.
+ *
+ * A front controller always knows its own document root, so that wins; the
+ * other host reads config; both fall back to the in-repo layout.
+ */
+function public_path(): string
+{
+    if (defined('PUBLIC_ROOT')) {
+        return PUBLIC_ROOT;
+    }
+    $configured = (string)\Core\Config::get('public_path', '');
+    return $configured !== '' ? rtrim($configured, '/') : APP_ROOT . '/public';
+}
+
+function admin_public_path(): string
+{
+    if (defined('ADMIN_PUBLIC_ROOT')) {
+        return ADMIN_PUBLIC_ROOT;
+    }
+    $configured = (string)\Core\Config::get('admin_public_path', '');
+    return $configured !== '' ? rtrim($configured, '/') : APP_ROOT . '/admin/public';
+}
+
 /** Versioned asset URL — busts caches on deploy without manual renaming. */
 function asset(string $path): string
 {
-    $abs = PUBLIC_PATH . $path;
+    $abs = public_path() . $path;
     $v   = is_file($abs) ? (string)filemtime($abs) : '1';
     return $path . '?v=' . $v;
 }
 
 function admin_asset(string $path): string
 {
-    $abs = ADMIN_PUBLIC_PATH . $path;
+    $abs = admin_public_path() . $path;
     $v   = is_file($abs) ? (string)filemtime($abs) : '1';
     return $path . '?v=' . $v;
 }

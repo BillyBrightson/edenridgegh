@@ -17,10 +17,17 @@ $checks = [
     'mbstring extension'      => [extension_loaded('mbstring'), extension_loaded('mbstring') ? 'available' : 'missing'],
     'ZipArchive (backups)'    => [class_exists(ZipArchive::class), class_exists(ZipArchive::class) ? 'available' : 'backups disabled'],
     'storage/ writable'       => [is_writable(APP_ROOT . '/storage'), APP_ROOT . '/storage'],
-    'media folder writable'   => [is_writable(PUBLIC_PATH . '/media') || @mkdir(PUBLIC_PATH . '/media', 0755, true), PUBLIC_PATH . '/media'],
+    'public site directory'   => [is_file(public_path() . '/index.php'), public_path()],
+    'media folder writable'   => [is_writable(public_path() . '/media') || is_writable(public_path()), public_path() . '/media'],
     'app root writable'       => [is_writable(APP_ROOT), 'needed once, to write config.php'],
 ];
-$required = ['PHP 8.1 or newer', 'PDO SQLite driver', 'GD image library', 'fileinfo extension', 'mbstring extension', 'storage/ writable', 'media folder writable', 'app root writable'];
+$required = ['PHP 8.1 or newer', 'PDO SQLite driver', 'GD image library', 'fileinfo extension', 'mbstring extension', 'storage/ writable', 'app root writable'];
+// Only meaningful when the installer is opened on the public site itself;
+// otherwise the operator supplies the path below and it is validated on submit.
+if (defined('PUBLIC_ROOT')) {
+    $required[] = 'media folder writable';
+    $required[] = 'public site directory';
+}
 $blocked  = false;
 foreach ($required as $key) {
     if (!$checks[$key][0]) {
@@ -42,7 +49,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && !$blocked) {
     // Where the public site's document root lives on disk. Auto-detected when
     // the installer is opened on the public host; typed in otherwise, because
     // image derivatives are written there and the path is not guessable.
-    $publicPath = rtrim(trim((string)($_POST['public_path'] ?? '')), '/') ?: PUBLIC_PATH;
+    $publicPath = rtrim(trim((string)($_POST['public_path'] ?? '')), '/') ?: public_path();
 
     if (!filter_var($siteUrl, FILTER_VALIDATE_URL)) {
         $errors[] = 'Enter the full public site URL, including https://';
@@ -58,6 +65,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && !$blocked) {
     }
     if (!is_dir($publicPath)) {
         $errors[] = 'The public site directory does not exist: ' . $publicPath;
+    } elseif (!is_file($publicPath . '/index.php')) {
+        // Any writable folder would pass an existence check and silently
+        // swallow every generated image. The public document root is the one
+        // holding the site's front controller.
+        $errors[] = 'That folder does not contain the public site (no index.php in ' . $publicPath . '). '
+            . 'Enter the directory this domain actually serves — on hosts that give each domain its own '
+            . 'folder that is usually the one named after the domain.';
     }
     if (strlen($password) < 10) {
         $errors[] = 'Choose a password of at least 10 characters.';

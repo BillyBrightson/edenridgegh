@@ -78,7 +78,7 @@ final class ImageProcessor
 
     public static function mediaDir(): string
     {
-        $dir = PUBLIC_PATH . '/media';
+        $dir = public_path() . '/media';
         if (!is_dir($dir)) {
             @mkdir($dir, 0755, true);
         }
@@ -241,7 +241,7 @@ final class ImageProcessor
     public static function purge(array $media): void
     {
         foreach (DB::all('SELECT path FROM media_variants WHERE media_id = ?', [$media['id']]) as $variant) {
-            $file = PUBLIC_PATH . $variant['path'];
+            $file = public_path() . $variant['path'];
             if (is_file($file)) {
                 @unlink($file);
             }
