@@ -48,6 +48,9 @@ final class Seo
 
     public static function siteUrl(string $path = '/'): string
     {
+        if (preg_match('#^https?://#i', $path)) {
+            return $path;
+        }
         return rtrim((string)Config::get('site_url', ''), '/') . '/' . ltrim($path, '/');
     }
 
