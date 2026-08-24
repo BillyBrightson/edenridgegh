@@ -144,6 +144,21 @@ final class Media
             if ($size) {
                 [$width, $height] = $size;
             }
+            // File size says little about how much memory decoding will take:
+            // a 3 MB JPEG can be 48 megapixels. Check before we commit.
+            ImageProcessor::raiseMemoryLimit();
+            if (!ImageProcessor::canProcess($width, $height)) {
+                @unlink($target);
+                $megapixels = round(((int)$width * (int)$height) / 1_000_000, 1);
+                $allowed    = round(ImageProcessor::maxPixels() / 1_000_000, 1);
+                return [null, sprintf(
+                    'That image is %d × %d pixels (%s megapixels), and this server can only resize images up to about %s megapixels. Please scale it down — around 2500 pixels on the longest side is plenty for the website — and upload it again.',
+                    (int)$width,
+                    (int)$height,
+                    $megapixels,
+                    $allowed
+                )];
+            }
         }
 
         $id = DB::insert('media', [

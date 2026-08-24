@@ -27,6 +27,55 @@ final class ImageProcessor
         return function_exists('imagewebp');
     }
 
+    /**
+     * GD decodes an image to width x height x 4 bytes, and resizing holds the
+     * source and destination at once. Shared hosts commonly cap PHP at 128 MB,
+     * which a photo straight off a modern phone will blow through — so raise
+     * the ceiling where the host allows it, and refuse politely where it does
+     * not, rather than dying mid-request with a blank page.
+     */
+    private const BYTES_PER_PIXEL = 4;
+    private const OVERHEAD_FACTOR = 2.2;
+    private const WANTED_MEMORY   = 512 * 1024 * 1024;
+
+    public static function raiseMemoryLimit(): void
+    {
+        if (self::memoryLimitBytes() < self::WANTED_MEMORY) {
+            @ini_set('memory_limit', '512M');
+        }
+    }
+
+    public static function memoryLimitBytes(): int
+    {
+        $raw = trim((string)ini_get('memory_limit'));
+        if ($raw === '' || $raw === '-1') {
+            return PHP_INT_MAX;
+        }
+        $unit = strtolower(substr($raw, -1));
+        $n    = (int)$raw;
+        return match ($unit) {
+            'g' => $n * 1073741824,
+            'm' => $n * 1048576,
+            'k' => $n * 1024,
+            default => $n,
+        };
+    }
+
+    /** Largest image, in pixels, this process can safely decode and resize. */
+    public static function maxPixels(): int
+    {
+        $available = self::memoryLimitBytes() - memory_get_usage(true);
+        return (int)max(1_000_000, $available / (self::BYTES_PER_PIXEL * self::OVERHEAD_FACTOR));
+    }
+
+    public static function canProcess(?int $width, ?int $height): bool
+    {
+        if (!$width || !$height) {
+            return true; // Unknown dimensions (SVG); nothing to decode.
+        }
+        return $width * $height <= self::maxPixels();
+    }
+
     public static function mediaDir(): string
     {
         $dir = PUBLIC_PATH . '/media';
@@ -95,6 +144,16 @@ final class ImageProcessor
                 copy($original, $target);
             }
             return 1;
+        }
+
+        self::raiseMemoryLimit();
+        if (!self::canProcess($media['width'] ? (int)$media['width'] : null, $media['height'] ? (int)$media['height'] : null)) {
+            Logger::error('Image too large to resize on this server', [
+                'media_id'   => $media['id'],
+                'dimensions' => $media['width'] . 'x' . $media['height'],
+                'max_pixels' => self::maxPixels(),
+            ]);
+            return 0;
         }
 
         $src = self::load($original, (string)$media['mime']);
