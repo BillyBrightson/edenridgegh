@@ -8,7 +8,20 @@ declare(strict_types=1);
 
 define('ADMIN_PUBLIC_ROOT', __DIR__);
 
-require dirname(__DIR__, 2) . '/core/bootstrap.php';
+/**
+ * Locate the application root.
+ *
+ * On hosts that serve each domain from its own directory, the app root is not
+ * a parent of this file, so a deployment drops an app-root.php here returning
+ * its absolute path. That file is deploy-specific and outside version control,
+ * which means redeploying this front controller can never clobber it — an
+ * earlier deploy overwrote a hand-edited require line and took the site down.
+ */
+$edenAppRoot = is_file(__DIR__ . '/app-root.php')
+    ? (string)(require __DIR__ . '/app-root.php')
+    : dirname(__DIR__, 2);
+
+require $edenAppRoot . '/core/bootstrap.php';
 
 use Core\{Activity, Auth, Backup, Cache, Config, Content, Csrf, DB, Enquiry, Gallery, Icons,
     ImageProcessor, Logger, Mailer, Media, Migrator, Router, Schema, Seeder, Seo, Session,

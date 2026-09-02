@@ -91,11 +91,17 @@ beside the sites rather than inside one.
 └── app.edenridgegh.com/    <- contents of admin/public/
 ```
 
-Both front controllers then need the same one-line edit:
+Then drop an `app-root.php` beside each front controller pointing at the
+application root:
 
 ```php
-require dirname(__DIR__) . '/edenridge/core/bootstrap.php';
+<?php
+return '/home/<user>/edenridge';
 ```
+
+That file is deploy-specific and gitignored, so redeploying `index.php` can
+never break the path. Without it, each front controller falls back to the
+in-repo layout.
 
 Delete the two `router.php` files (built-in server only) and open
 `/install` on either host. The installer records the document root paths in
@@ -127,12 +133,13 @@ public_html/                 <- edenridgegh.com
     └── .htaccess            <- deploy/app-root.htaccess.txt, renamed
 ```
 
-Then edit two lines so the front controllers can find the relocated app root:
+Then drop an `app-root.php` beside each front controller — in
+`public_html/` and `public_html/app/` — containing:
 
-| File | Change |
-|---|---|
-| `public_html/index.php` | `require __DIR__ . '/_eden/core/bootstrap.php';` |
-| `public_html/app/index.php` | `require dirname(__DIR__) . '/_eden/core/bootstrap.php';` |
+```php
+<?php
+return '/home/<user>/public_html/_eden';
+```
 
 Delete both `router.php` files (they are only for PHP's built-in server), then
 visit `https://app.edenridgegh.com/install`.

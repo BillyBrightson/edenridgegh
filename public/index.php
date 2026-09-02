@@ -10,7 +10,20 @@ declare(strict_types=1);
 // docroots are often siblings of the app root rather than folders inside it.
 define('PUBLIC_ROOT', __DIR__);
 
-require dirname(__DIR__) . '/core/bootstrap.php';
+/**
+ * Locate the application root.
+ *
+ * On hosts that serve each domain from its own directory, the app root is not
+ * a parent of this file, so a deployment drops an app-root.php here returning
+ * its absolute path. That file is deploy-specific and outside version control,
+ * which means redeploying this front controller can never clobber it — an
+ * earlier deploy overwrote a hand-edited require line and took the site down.
+ */
+$edenAppRoot = is_file(__DIR__ . '/app-root.php')
+    ? (string)(require __DIR__ . '/app-root.php')
+    : dirname(__DIR__);
+
+require $edenAppRoot . '/core/bootstrap.php';
 
 use Core\{Cache, Config, Content, Csrf, Enquiry, Logger, Mailer, Router, Schema, Seo, Session, Settings, Video, View};
 

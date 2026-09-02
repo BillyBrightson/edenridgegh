@@ -18,3 +18,6 @@ public/media/*
 .ref/
 
 .DS_Store
+
+# Deployment-specific: absolute path to the application root
+app-root.php
