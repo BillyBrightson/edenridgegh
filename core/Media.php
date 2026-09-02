@@ -314,20 +314,6 @@ final class Media
     // Rendering
     // ------------------------------------------------------------------
 
-    /**
-     * Image derivatives live in the public site's document root, so a
-     * root-relative "/media/..." only resolves on the public hostname. The
-     * dashboard runs on its own hostname and needs absolute URLs.
-     */
-    private static function publicUrl(string $path): string
-    {
-        if ($path === '' || defined('PUBLIC_ROOT') || preg_match('#^https?://#i', $path)) {
-            return $path;
-        }
-        $base = rtrim((string)Config::get('site_url', ''), '/');
-        return $base === '' ? $path : $base . $path;
-    }
-
     /** @return array<int, array> variants keyed by width, ascending */
     public static function variants(int $mediaId): array
     {
@@ -345,7 +331,7 @@ final class Media
             return '';
         }
         if ($media['mime'] === 'image/svg+xml') {
-            return self::publicUrl('/media/' . $media['filename']);
+            return '/media/' . $media['filename'];
         }
         $best = null;
         foreach (self::variants((int)$media['id']) as $v) {
@@ -358,7 +344,7 @@ final class Media
                 break;
             }
         }
-        return $best ? self::publicUrl((string)$best['path']) : '';
+        return $best ? (string)$best['path'] : '';
     }
 
     /**
@@ -378,7 +364,7 @@ final class Media
         if ($media['mime'] === 'image/svg+xml') {
             return sprintf(
                 '<img src="%s" alt="%s"%s%s>',
-                e(self::publicUrl('/media/' . $media['filename'])),
+                e('/media/' . $media['filename']),
                 e($alt),
                 isset($opts['class']) ? ' class="' . e((string)$opts['class']) . '"' : '',
                 isset($opts['style']) ? ' style="' . e((string)$opts['style']) . '"' : ''
@@ -394,10 +380,10 @@ final class Media
                 $fallback = (string)$v['path'];
                 continue;
             }
-            $srcset[] = self::publicUrl((string)$v['path']) . ' ' . $v['width'] . 'w';
+            $srcset[] = $v['path'] . ' ' . $v['width'] . 'w';
             $largest  = $v;
         }
-        $src = $fallback !== '' ? self::publicUrl($fallback) : (string)($largest['path'] ?? '');
+        $src = $fallback !== '' ? $fallback : (string)($largest['path'] ?? '');
         if ($src === '') {
             return '';
         }
@@ -460,14 +446,14 @@ final class Media
                 $href = (string)$v['path'];
                 continue;
             }
-            $srcset[] = self::publicUrl((string)$v['path']) . ' ' . $v['width'] . 'w';
+            $srcset[] = $v['path'] . ' ' . $v['width'] . 'w';
         }
         if ($href === '' && $srcset === []) {
             return '';
         }
         return sprintf(
             '<link rel="preload" as="image" href="%s"%s fetchpriority="high">',
-            e(self::publicUrl($href)),
+            e($href),
             $srcset ? ' imagesrcset="' . e(implode(', ', $srcset)) . '" imagesizes="' . e($sizes) . '"' : ''
         );
     }

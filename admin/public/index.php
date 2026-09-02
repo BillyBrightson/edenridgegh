@@ -18,7 +18,17 @@ header('X-Robots-Tag: noindex, nofollow');
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 header('Referrer-Policy: strict-origin-when-cross-origin');
-header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'");
+// Image previews are served from the public site, which is a different origin
+// when the dashboard runs on its own subdomain — so it has to be named in
+// img-src, or the browser blocks every thumbnail. Nothing else is widened.
+$publicOrigin = '';
+$siteUrl = (string)Config::get('site_url', '');
+if ($siteUrl !== '' && ($parts = parse_url($siteUrl)) && !empty($parts['host'])) {
+    $publicOrigin = ($parts['scheme'] ?? 'https') . '://' . $parts['host']
+        . (isset($parts['port']) ? ':' . $parts['port'] : '');
+}
+$imgSrc = trim("'self' data: " . $publicOrigin);
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src {$imgSrc}; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'");
 if (Session::isHttps()) {
     header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
 }
