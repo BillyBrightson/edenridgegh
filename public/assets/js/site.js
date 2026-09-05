@@ -330,6 +330,19 @@
     form.appendChild(box);
   }
 
+  /**
+   * A Turnstile token is single-use. Without this, a visitor who trips a
+   * validation error — a mistyped email, say — fixes it, submits again and is
+   * told the anti-spam check failed, with no way forward but a page reload.
+   */
+  function resetTurnstile(form) {
+    if (typeof window.turnstile === 'undefined') return;
+    var widget = form.querySelector('.cf-turnstile');
+    if (widget) {
+      try { window.turnstile.reset(widget); } catch (e) { /* widget not rendered yet */ }
+    }
+  }
+
   document.querySelectorAll('form[data-enquiry]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       if (!window.fetch) return; // Fall back to a normal POST.
@@ -369,12 +382,14 @@
             track('enquiry_submit', { interest: data.interest || '' });
             if (data.video_url) revealVideo(data.video_url);
           } else if (data.errors) {
+            resetTurnstile(form);
             Object.keys(data.errors).forEach(function (field) {
               showFieldError(form, field, data.errors[field]);
             });
             var firstBad = form.querySelector('.has-error input, .has-error select, .has-error textarea');
             if (firstBad) firstBad.focus();
           } else {
+            resetTurnstile(form);
             showFormAlert(form, data.error || 'Something went wrong. Please try again.');
           }
         })
