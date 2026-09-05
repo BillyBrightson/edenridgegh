@@ -4,8 +4,8 @@
   "logo_media_id":        { "value": "", "type": "string" },
   "favicon_media_id":     { "value": "", "type": "string" },
 
-  "contact_phone":        { "value": "+1 (404) 931-7171", "type": "string" },
-  "contact_whatsapp":     { "value": "+1 (404) 931-7171", "type": "string" },
+  "contact_phone":        { "value": "+233 595039630", "type": "string" },
+  "contact_whatsapp":     { "value": "+233 595039630", "type": "string" },
   "contact_email":        { "value": "sales@edenridgegh.com", "type": "string" },
   "contact_address":      { "value": "Community 25, Tema, Greater Accra, Ghana", "type": "string" },
 

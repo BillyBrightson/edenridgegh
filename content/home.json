@@ -626,17 +626,17 @@
       {
         "type": "phone",
         "label": "Phone",
-        "value": "+1 (404) 931-7171"
+        "value": "+233 595039630"
       },
       {
         "type": "whatsapp",
         "label": "WhatsApp",
-        "value": "+1 (404) 931-7171"
+        "value": "+233 595039630"
       },
       {
         "type": "email",
         "label": "Email",
-        "value": "edbenson11@outlook.com"
+        "value": "sales@edenridgegh.com"
       },
       {
         "type": "address",
@@ -711,12 +711,12 @@
         "heading": "Contact",
         "links": [
           {
-            "label": "edbenson11@outlook.com",
-            "target": "mailto:edbenson11@outlook.com"
+            "label": "sales@edenridgegh.com",
+            "target": "mailto:sales@edenridgegh.com"
           },
           {
-            "label": "+1 (404) 931-7171",
-            "target": "tel:+14049317171"
+            "label": "+233 595039630",
+            "target": "tel:+233595039630"
           }
         ]
       }
