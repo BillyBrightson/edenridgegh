@@ -95,7 +95,38 @@ use Core\{Csrf, Media};
 </form>
 
 <div class="card" style="margin-top:18px;">
-  <div class="card-head"><h3>Add images to the gallery</h3></div>
+  <div class="card-head"><h3>Upload photos into the gallery</h3></div>
+  <div class="card-body">
+    <form method="post" action="/gallery/upload" enctype="multipart/form-data">
+      <?= Csrf::field() ?>
+      <p class="hint">
+        Choose one or more photos. They are added to the media library and placed in the gallery
+        in one step — no need to upload first and tick them below.
+        Up to <?= e(human_bytes(\Core\Media::serverLimit())) ?> per file.
+      </p>
+      <div class="grid cols-2">
+        <div class="field">
+          <label class="field-label" for="gallery-files">Photos</label>
+          <input type="file" id="gallery-files" name="files[]" accept="image/jpeg,image/png,image/webp" multiple required>
+        </div>
+        <div class="field">
+          <label class="field-label" for="gallery-upload-cat">Filter category</label>
+          <select id="gallery-upload-cat" name="category_id">
+            <option value="">No category</option>
+            <?php foreach ($categories as $category): ?>
+              <option value="<?= (int)$category['id'] ?>"><?= e((string)$category['label']) ?></option>
+            <?php endforeach; ?>
+          </select>
+          <p class="hint">Which filter chip they appear under on the site.</p>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm" style="margin-top:6px;">Upload and add</button>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-head"><h3>Add images already in the library</h3></div>
   <div class="card-body">
     <form method="post" action="/gallery/add">
       <?= Csrf::field() ?>

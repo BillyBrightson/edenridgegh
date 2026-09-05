@@ -621,6 +621,59 @@ $router->post('/gallery/save', static function (): void {
     redirect('/gallery');
 });
 
+$router->post('/gallery/upload', static function (): void {
+    Auth::requireAbility('edit_content');
+    Csrf::verify();
+
+    $categoryId = post('category_id', '') !== '' ? (int)post('category_id') : null;
+    $added = $skipped = 0;
+    $errors = [];
+
+    $files = $_FILES['files'] ?? null;
+    if ($files && is_array($files['name'])) {
+        foreach (array_keys($files['name']) as $i) {
+            if ((int)$files['error'][$i] === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+            [$media, $error] = Media::store([
+                'name'     => $files['name'][$i],
+                'type'     => $files['type'][$i],
+                'tmp_name' => $files['tmp_name'][$i],
+                'error'    => $files['error'][$i],
+                'size'     => $files['size'][$i],
+            ], Auth::id());
+            if (!$media) {
+                $errors[] = $error;
+                continue;
+            }
+            // Media::store dedupes by hash, so re-uploading a file already in
+            // the grid returns the existing record rather than a copy.
+            if (Gallery::hasMedia((int)$media['id'])) {
+                $skipped++;
+                continue;
+            }
+            Gallery::addItem((int)$media['id'], $categoryId, '');
+            $added++;
+        }
+    }
+
+    Cache::flush();
+    if ($added) {
+        Session::flash('success', $added . ' image' . ($added === 1 ? '' : 's') . ' uploaded and added to the gallery.');
+    } elseif (!$errors && $skipped) {
+        Session::flash('warn', 'Already in the gallery — nothing to add.');
+    } elseif (!$errors) {
+        Session::flash('error', 'Choose at least one image to upload.');
+    }
+    if ($skipped && $added) {
+        Session::flash('warn', $skipped . ' already in the gallery, so left alone.');
+    }
+    foreach (array_slice(array_unique(array_filter($errors)), 0, 3) as $error) {
+        Session::flash('error', $error);
+    }
+    redirect('/gallery');
+});
+
 $router->post('/gallery/add', static function (): void {
     Auth::requireAbility('edit_content');
     Csrf::verify();

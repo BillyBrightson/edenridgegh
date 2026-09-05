@@ -114,6 +114,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && !$blocked) {
             if (($_POST['smtp_password'] ?? '') !== '') {
                 Settings::set('smtp_password', (string)$_POST['smtp_password']);
             }
+            // The seeder has already written a placeholder from-address, and the
+            // settings table wins over config.php — so persist the answer here
+            // or the address typed at install is silently ignored.
+            $fromEmail = trim((string)($_POST['smtp_from_email'] ?? ''));
+            if ($fromEmail !== '') {
+                Settings::set('smtp_from_email', $fromEmail);
+            }
             $done = true;
         } catch (\Throwable $ex) {
             \Core\Logger::error('Install failed', ['error' => $ex->getMessage()]);

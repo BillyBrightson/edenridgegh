@@ -24,6 +24,11 @@ final class Gallery
         return DB::all($sql);
     }
 
+    public static function hasMedia(int $mediaId): bool
+    {
+        return (bool)DB::value('SELECT COUNT(*) FROM gallery_items WHERE media_id = ?', [$mediaId]);
+    }
+
     public static function addItem(int $mediaId, ?int $categoryId = null, string $caption = ''): int
     {
         $max = (int)DB::value('SELECT COALESCE(MAX(sort_order), 0) FROM gallery_items');

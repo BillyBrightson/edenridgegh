@@ -26,12 +26,12 @@ return [
 
     'mail' => [
         'transport'  => 'smtp',     // smtp | log
-        'host'       => 'localhost',
+        'host'       => 'smtp.dreamhost.com',
         'port'       => 587,
         'encryption' => 'tls',      // tls | ssl | none
-        'username'   => '',
+        'username'   => 'info@edenridgegh.com',  // a real mailbox on the account
         'password'   => '',
-        'from_email' => 'no-reply@edenridgegh.com',
+        'from_email' => 'info@edenridgegh.com',  // must be a mailbox that exists, or the host rejects it
         'from_name'  => 'Eden Ridge',
     ],
 ];

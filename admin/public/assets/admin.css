@@ -48,6 +48,8 @@ input,select,textarea,button{font-family:inherit; font-size:inherit;}
 /* The `hidden` attribute must win over any class that sets a display value —
    otherwise .btn, .consent and friends stay visible when JS hides them. */
 [hidden]{display:none !important;}
+.field input[type="file"]{padding:9px 10px; background:var(--a-surface); font-size:13px;}
+
 
 
 /* ------------------------------------------------------------- structure */
