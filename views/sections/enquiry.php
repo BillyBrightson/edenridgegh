@@ -62,6 +62,9 @@ $turnstile = (string)Settings::get('turnstile_site_key', '');
           <div class="form-row">
             <label for="finterest"><?= e($c['interest_label'] ?? "I'm Interested In") ?></label>
             <select id="finterest" name="interest">
+              <?php if (($c['interest_placeholder'] ?? '') !== ''): ?>
+                <option value="" selected><?= e($c['interest_placeholder']) ?></option>
+              <?php endif; ?>
               <?php foreach (rows($c, 'interest_options') as $option): ?>
                 <option value="<?= e($option['label'] ?? '') ?>"><?= e($option['label'] ?? '') ?></option>
               <?php endforeach; ?>

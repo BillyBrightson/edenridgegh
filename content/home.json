@@ -5,17 +5,40 @@
     "logo_tagline": "Residential Collection",
     "sticky_on_scroll": true,
     "nav_items": [
-      { "label": "About", "anchor": "#about", "is_visible": true },
-      { "label": "Homes", "anchor": "#homes", "is_visible": true },
-      { "label": "Floor Plans", "anchor": "#floorplans", "is_visible": true },
-      { "label": "Gallery", "anchor": "#gallery", "is_visible": true },
-      { "label": "Location", "anchor": "#location", "is_visible": true },
-      { "label": "Contact", "anchor": "#contact", "is_visible": true }
+      {
+        "label": "About",
+        "anchor": "#about",
+        "is_visible": true
+      },
+      {
+        "label": "Homes",
+        "anchor": "#homes",
+        "is_visible": true
+      },
+      {
+        "label": "Floor Plans",
+        "anchor": "#floorplans",
+        "is_visible": true
+      },
+      {
+        "label": "Gallery",
+        "anchor": "#gallery",
+        "is_visible": true
+      },
+      {
+        "label": "Location",
+        "anchor": "#location",
+        "is_visible": true
+      },
+      {
+        "label": "Contact",
+        "anchor": "#contact",
+        "is_visible": true
+      }
     ],
     "cta_label": "Book a Consultation",
     "cta_target": "#contact"
   },
-
   "hero": {
     "eyebrow": "Community 25 · Tema · Greater Accra",
     "headline": "Bold, contemporary\n*residences* for a\nnew generation",
@@ -28,13 +51,24 @@
     "scroll_label": "Scroll",
     "show_stats": true,
     "stats": [
-      { "value": "4", "label": "Bedrooms" },
-      { "value": "Gated", "label": "Community" },
-      { "value": "2+", "label": "Parking Spaces" },
-      { "value": "2025", "label": "Collection" }
+      {
+        "value": "4",
+        "label": "Bedrooms"
+      },
+      {
+        "value": "Gated",
+        "label": "Community"
+      },
+      {
+        "value": "2+",
+        "label": "Parking Spaces"
+      },
+      {
+        "value": "2025",
+        "label": "Collection"
+      }
     ]
   },
-
   "vision": {
     "spreads": [
       {
@@ -62,23 +96,53 @@
     "band_body": "Eden Ridge is envisioned as more than a collection of residences. It is a thoughtfully planned contemporary community designed around privacy, architecture, wellness, and everyday convenience — establishing a new standard for residential living within Ghana's emerging luxury market.",
     "band_image": "@3f7c769a-community-row.jpg"
   },
-
   "why": {
     "eyebrow": "Why Eden Ridge",
     "headline": "Considered from every angle",
     "lede": "Each residence at Eden Ridge is shaped by the same set of priorities — privacy, durability, and everyday comfort — carried through from architecture to the smallest fixture.",
     "items": [
-      { "icon": "roof", "title": "Contemporary Architecture", "body": "Clean horizontal lines, expansive glazing, and double-height living volumes designed for lasting visual relevance." },
-      { "icon": "building", "title": "Scandinavian-Influenced Interiors", "body": "Warm timber joinery, considered lighting, and open-plan layouts that let each room breathe." },
-      { "icon": "shield", "title": "Secure Gated Community", "body": "Controlled access and perimeter security designed around the way modern buyers actually want to live." },
-      { "icon": "trend", "title": "Investment Potential", "body": "Positioned within Ghana's rapidly expanding Eastern Corridor, benefiting from infrastructure growth." },
-      { "icon": "family", "title": "Family-Friendly Living", "body": "Landscaped surroundings, dedicated play areas, and generous room proportions for growing households." },
-      { "icon": "lines", "title": "Connected Location", "body": "Minutes from the Eastern Corridor Highway, with schools, healthcare, and retail nearby." },
-      { "icon": "grid", "title": "Quality Construction", "body": "Premium marble countertops, contemporary glazing systems, and fitted cabinetry throughout." },
-      { "icon": "plus", "title": "Thoughtful Design", "body": "Every plan considered from the perspective of the person living within it — from architecture down to the smallest fixture." }
+      {
+        "icon": "roof",
+        "title": "Contemporary Architecture",
+        "body": "Clean horizontal lines, expansive glazing, and double-height living volumes designed for lasting visual relevance."
+      },
+      {
+        "icon": "building",
+        "title": "Scandinavian-Influenced Interiors",
+        "body": "Warm timber joinery, considered lighting, and open-plan layouts that let each room breathe."
+      },
+      {
+        "icon": "shield",
+        "title": "Secure Gated Community",
+        "body": "Controlled access and perimeter security designed around the way modern buyers actually want to live."
+      },
+      {
+        "icon": "trend",
+        "title": "Investment Potential",
+        "body": "Positioned within Ghana's rapidly expanding Eastern Corridor, benefiting from infrastructure growth."
+      },
+      {
+        "icon": "family",
+        "title": "Family-Friendly Living",
+        "body": "Landscaped surroundings, dedicated play areas, and generous room proportions for growing households."
+      },
+      {
+        "icon": "lines",
+        "title": "Connected Location",
+        "body": "Minutes from the Eastern Corridor Highway, with schools, healthcare, and retail nearby."
+      },
+      {
+        "icon": "grid",
+        "title": "Quality Construction",
+        "body": "Premium marble countertops, contemporary glazing systems, and fitted cabinetry throughout."
+      },
+      {
+        "icon": "plus",
+        "title": "Thoughtful Design",
+        "body": "Every plan considered from the perspective of the person living within it — from architecture down to the smallest fixture."
+      }
     ]
   },
-
   "residence": {
     "eyebrow": "Explore the Homes",
     "headline": "The Eden Ridge Residence",
@@ -87,28 +151,58 @@
     "price_note": "Reservation from $5,000 · Contact for full pricing",
     "image": "@7b37227a-hero-exterior.jpg",
     "specs": [
-      { "label": "Bedrooms", "value": "4" },
-      { "label": "Bathrooms", "value": "En-suite primary + additional" },
-      { "label": "Ground Floor Area", "value": "46.68 m²" },
-      { "label": "Parking", "value": "2+ spaces" },
-      { "label": "Community", "value": "Gated, controlled access" }
+      {
+        "label": "Bedrooms",
+        "value": "4"
+      },
+      {
+        "label": "Bathrooms",
+        "value": "En-suite primary + additional"
+      },
+      {
+        "label": "Ground Floor Area",
+        "value": "46.68 m²"
+      },
+      {
+        "label": "Parking",
+        "value": "2+ spaces"
+      },
+      {
+        "label": "Community",
+        "value": "Gated, controlled access"
+      }
     ],
     "features": [
-      { "text": "Open-plan living, kitchen & dining" },
-      { "text": "Indoor garden beneath the staircase" },
-      { "text": "Glass balustrade floating staircase" },
-      { "text": "Green marble kitchen island" },
-      { "text": "Walk-in wardrobe with LED lighting" },
-      { "text": "Private terrace off the master suite" },
-      { "text": "Smart-home & fibre internet ready" },
-      { "text": "Backup power & water storage infrastructure" }
+      {
+        "text": "Open-plan living, kitchen & dining"
+      },
+      {
+        "text": "Indoor garden beneath the staircase"
+      },
+      {
+        "text": "Glass balustrade floating staircase"
+      },
+      {
+        "text": "Green marble kitchen island"
+      },
+      {
+        "text": "Walk-in wardrobe with LED lighting"
+      },
+      {
+        "text": "Private terrace off the master suite"
+      },
+      {
+        "text": "Smart-home & fibre internet ready"
+      },
+      {
+        "text": "Backup power & water storage infrastructure"
+      }
     ],
     "cta_1_label": "View Floor Plans",
     "cta_1_target": "#floorplans",
     "cta_2_label": "Enquire About This Home",
     "cta_2_target": "#contact"
   },
-
   "residence_details": {
     "blocks": [
       {
@@ -167,14 +261,12 @@
       }
     ]
   },
-
   "gallery": {
     "eyebrow": "Gallery",
     "headline": "Every space, in detail",
     "lede": "Renders shown are indicative of the finished residence. Filter by room to explore.",
     "all_label": "All"
   },
-
   "floorplans": {
     "eyebrow": "Floor Plans",
     "headline": "Considered room by room",
@@ -186,11 +278,31 @@
         "subtitle": "Living Area",
         "image": "@521f134a-plan-ground-floor.jpg",
         "rows": [
-          { "label": "Living / Kitchen / Dining", "value": "43.92 m²", "is_total": false },
-          { "label": "WC", "value": "2.76 m²", "is_total": false },
-          { "label": "Entrance & Lobby", "value": "Included", "is_total": false },
-          { "label": "Indoor Garden Zone", "value": "Included", "is_total": false },
-          { "label": "Ground Floor Total", "value": "46.68 m²", "is_total": true }
+          {
+            "label": "Living / Kitchen / Dining",
+            "value": "43.92 m²",
+            "is_total": false
+          },
+          {
+            "label": "WC",
+            "value": "2.76 m²",
+            "is_total": false
+          },
+          {
+            "label": "Entrance & Lobby",
+            "value": "Included",
+            "is_total": false
+          },
+          {
+            "label": "Indoor Garden Zone",
+            "value": "Included",
+            "is_total": false
+          },
+          {
+            "label": "Ground Floor Total",
+            "value": "46.68 m²",
+            "is_total": true
+          }
         ],
         "note": "Open-plan ground floor designed for seamless flow between living, dining, and kitchen. Natural light floods through full-height glazed systems.",
         "cta_text": "Contact us for the downloadable plan pack"
@@ -201,11 +313,31 @@
         "subtitle": "Culinary Zone",
         "image": "@0c3c6c21-plan-kitchen.jpg",
         "rows": [
-          { "label": "Designer Kitchen", "value": "Open Plan", "is_total": false },
-          { "label": "Green Marble Island", "value": "Included", "is_total": false },
-          { "label": "Breakfast Bar Seating", "value": "2 seats", "is_total": false },
-          { "label": "Utility & Storage", "value": "Included", "is_total": false },
-          { "label": "Total Residence", "value": "Contact for Details", "is_total": true }
+          {
+            "label": "Designer Kitchen",
+            "value": "Open Plan",
+            "is_total": false
+          },
+          {
+            "label": "Green Marble Island",
+            "value": "Included",
+            "is_total": false
+          },
+          {
+            "label": "Breakfast Bar Seating",
+            "value": "2 seats",
+            "is_total": false
+          },
+          {
+            "label": "Utility & Storage",
+            "value": "Included",
+            "is_total": false
+          },
+          {
+            "label": "Total Residence",
+            "value": "Contact for Details",
+            "is_total": true
+          }
         ],
         "note": "Premium kitchen designed around a statement green marble island. Full-height cabinetry in warm timber integrates with the open-plan layout.",
         "cta_text": "Contact us for the downloadable plan pack"
@@ -216,59 +348,165 @@
         "subtitle": "Suite & Bath",
         "image": "@ed053355-plan-upper-floor.jpg",
         "rows": [
-          { "label": "Master Suite", "value": "Generous", "is_total": false },
-          { "label": "Primary Bathroom", "value": "En-Suite", "is_total": false },
-          { "label": "Walk-In Wardrobe", "value": "Included", "is_total": false },
-          { "label": "Private Terrace", "value": "Included", "is_total": false },
-          { "label": "Bedrooms", "value": "4 Total", "is_total": true }
+          {
+            "label": "Master Suite",
+            "value": "Generous",
+            "is_total": false
+          },
+          {
+            "label": "Primary Bathroom",
+            "value": "En-Suite",
+            "is_total": false
+          },
+          {
+            "label": "Walk-In Wardrobe",
+            "value": "Included",
+            "is_total": false
+          },
+          {
+            "label": "Private Terrace",
+            "value": "Included",
+            "is_total": false
+          },
+          {
+            "label": "Bedrooms",
+            "value": "4 Total",
+            "is_total": true
+          }
         ],
         "note": "4-bedroom residence with private en-suite bathrooms, walk-in wardrobes, and private outdoor terrace spaces.",
         "cta_text": "Contact us for the downloadable plan pack"
       }
     ]
   },
-
   "amenities": {
     "eyebrow": "Elevated Community",
     "headline": "Community amenities",
     "lede": "Beyond your front door, Eden Ridge cultivates a community of shared comfort — thoughtfully curated amenities for everyday life.",
     "items": [
-      { "number": "01", "icon": "none", "title": "Swimming Pool", "body": "Resort-style communal pool with landscaped surrounds." },
-      { "number": "05", "icon": "none", "title": "Private Clubhouse", "body": "Exclusive residents' lounge and gathering space." },
-      { "number": "02", "icon": "none", "title": "Outdoor Lounge Areas", "body": "Thoughtfully designed social spaces for residents." },
-      { "number": "06", "icon": "none", "title": "Children's Recreation", "body": "Safe, dedicated play spaces for young residents." },
-      { "number": "03", "icon": "none", "title": "Modern Fitness Centre", "body": "Fully equipped residents-only gym facility." },
-      { "number": "07", "icon": "none", "title": "Landscaped Gardens", "body": "Curated green spaces and walking paths throughout." },
-      { "number": "04", "icon": "none", "title": "Secure Gated Access", "body": "24/7 controlled entry and perimeter security." },
-      { "number": "08", "icon": "none", "title": "Utility Infrastructure", "body": "Backup power, water storage, and fibre internet." }
+      {
+        "number": "01",
+        "icon": "none",
+        "title": "Swimming Pool",
+        "body": "Resort-style communal pool with landscaped surrounds."
+      },
+      {
+        "number": "05",
+        "icon": "none",
+        "title": "Private Clubhouse",
+        "body": "Exclusive residents' lounge and gathering space."
+      },
+      {
+        "number": "02",
+        "icon": "none",
+        "title": "Outdoor Lounge Areas",
+        "body": "Thoughtfully designed social spaces for residents."
+      },
+      {
+        "number": "06",
+        "icon": "none",
+        "title": "Children's Recreation",
+        "body": "Safe, dedicated play spaces for young residents."
+      },
+      {
+        "number": "03",
+        "icon": "none",
+        "title": "Modern Fitness Centre",
+        "body": "Fully equipped residents-only gym facility."
+      },
+      {
+        "number": "07",
+        "icon": "none",
+        "title": "Landscaped Gardens",
+        "body": "Curated green spaces and walking paths throughout."
+      },
+      {
+        "number": "04",
+        "icon": "none",
+        "title": "Secure Gated Access",
+        "body": "24/7 controlled entry and perimeter security."
+      },
+      {
+        "number": "08",
+        "icon": "none",
+        "title": "Utility Infrastructure",
+        "body": "Backup power, water storage, and fibre internet."
+      }
     ]
   },
-
   "location": {
     "eyebrow": "Location & Connectivity",
     "headline": "Connected to everything that matters",
     "lede": "Located within Ghana's rapidly expanding Eastern Corridor — Community 25, Tema — Eden Ridge offers the balance between tranquillity, accessibility, and long-term investment potential.",
     "columns": [
-      { "heading": "Transport", "rows": [
-        { "label": "Accra CBD", "value": "Approx. 50 miles" },
-        { "label": "Kotoka Airport", "value": "~60 minutes" },
-        { "label": "Eastern Corridor Hwy", "value": "Minutes away" }
-      ]},
-      { "heading": "Healthcare", "rows": [
-        { "label": "Healthcare facilities", "value": "Nearby" },
-        { "label": "Specialist hospitals", "value": "Accessible" },
-        { "label": "Pharmacies & clinics", "value": "Nearby" }
-      ]},
-      { "heading": "Education & Retail", "rows": [
-        { "label": "International schools", "value": "Nearby" },
-        { "label": "Shopping & retail", "value": "Nearby" },
-        { "label": "Hospitality & dining", "value": "Nearby" }
-      ]},
-      { "heading": "Lifestyle", "rows": [
-        { "label": "Leisure & recreation", "value": "Nearby" },
-        { "label": "Golf & sports facilities", "value": "Nearby" },
-        { "label": "Fine dining & experiences", "value": "Nearby" }
-      ]}
+      {
+        "heading": "Transport",
+        "rows": [
+          {
+            "label": "Accra CBD",
+            "value": "Approx. 50 miles"
+          },
+          {
+            "label": "Kotoka Airport",
+            "value": "~60 minutes"
+          },
+          {
+            "label": "Eastern Corridor Hwy",
+            "value": "Minutes away"
+          }
+        ]
+      },
+      {
+        "heading": "Healthcare",
+        "rows": [
+          {
+            "label": "Healthcare facilities",
+            "value": "Nearby"
+          },
+          {
+            "label": "Specialist hospitals",
+            "value": "Accessible"
+          },
+          {
+            "label": "Pharmacies & clinics",
+            "value": "Nearby"
+          }
+        ]
+      },
+      {
+        "heading": "Education & Retail",
+        "rows": [
+          {
+            "label": "International schools",
+            "value": "Nearby"
+          },
+          {
+            "label": "Shopping & retail",
+            "value": "Nearby"
+          },
+          {
+            "label": "Hospitality & dining",
+            "value": "Nearby"
+          }
+        ]
+      },
+      {
+        "heading": "Lifestyle",
+        "rows": [
+          {
+            "label": "Leisure & recreation",
+            "value": "Nearby"
+          },
+          {
+            "label": "Golf & sports facilities",
+            "value": "Nearby"
+          },
+          {
+            "label": "Fine dining & experiences",
+            "value": "Nearby"
+          }
+        ]
+      }
     ],
     "map_type": "stylised",
     "map_pin_label": "Eden Ridge — Community 25, Tema",
@@ -278,48 +516,100 @@
     "map_link_url": "",
     "closing_line": "A location positioned for both lifestyle and future growth."
   },
-
   "investment": {
     "eyebrow": "Investment Case",
     "headline": "Why invest in *Eden Ridge*",
     "image": "@25e01f3b-invest-exterior.jpg",
     "items": [
-      { "title": "Strategic Location", "body": "Positioned within Ghana's rapidly expanding Eastern Corridor, benefiting from infrastructure growth and rising residential demand." },
-      { "title": "Contemporary Architecture", "body": "Bold modern design and elevated architectural detailing create a product designed to remain visually relevant for decades." },
-      { "title": "Secure Gated Living", "body": "Modern buyers increasingly prioritize privacy and security. Eden Ridge is designed around these evolving lifestyle expectations." },
-      { "title": "Long-Term Investment Potential", "body": "As Ghana attracts international and diaspora investment, demand for premium residential communities continues to strengthen." },
-      { "title": "Modern Lifestyle Experience", "body": "Open-plan living, contemporary finishes, private parking, and integrated infrastructure create an elevated day-to-day living experience." },
-      { "title": "Future Growth Market", "body": "Eden Ridge represents an opportunity to secure property within one of West Africa's most promising emerging residential markets." }
+      {
+        "title": "Strategic Location",
+        "body": "Positioned within Ghana's rapidly expanding Eastern Corridor, benefiting from infrastructure growth and rising residential demand."
+      },
+      {
+        "title": "Contemporary Architecture",
+        "body": "Bold modern design and elevated architectural detailing create a product designed to remain visually relevant for decades."
+      },
+      {
+        "title": "Secure Gated Living",
+        "body": "Modern buyers increasingly prioritize privacy and security. Eden Ridge is designed around these evolving lifestyle expectations."
+      },
+      {
+        "title": "Long-Term Investment Potential",
+        "body": "As Ghana attracts international and diaspora investment, demand for premium residential communities continues to strengthen."
+      },
+      {
+        "title": "Modern Lifestyle Experience",
+        "body": "Open-plan living, contemporary finishes, private parking, and integrated infrastructure create an elevated day-to-day living experience."
+      },
+      {
+        "title": "Future Growth Market",
+        "body": "Eden Ridge represents an opportunity to secure property within one of West Africa's most promising emerging residential markets."
+      }
     ],
     "summary": "A development designed for both lifestyle and long-term value."
   },
-
   "process": {
     "eyebrow": "How to Purchase",
     "headline": "Payment structure",
     "lede": "Flexible payment options are available to accommodate homebuyers and investors. Contact us to discuss your individual requirements and preferred structure.",
     "stages": [
-      { "stage_label": "Stage 01", "title": "Reservation", "amount": "$5,000", "body": "Refundable reservation deposit to secure your preferred unit and confirm your position within the development." },
-      { "stage_label": "Stage 02", "title": "Contract", "amount": "30%", "body": "Payable upon signing the sale and purchase agreement. Formalises ownership rights and construction commitment." },
-      { "stage_label": "Stage 03", "title": "Construction", "amount": "30%", "body": "Staged instalments aligned with verified construction milestones throughout the build period." },
-      { "stage_label": "Stage 04", "title": "Completion", "amount": "40%", "body": "Final balance payable upon completion and handover. Keys released upon full clearance of outstanding amounts." }
+      {
+        "stage_label": "Stage 01",
+        "title": "Reservation",
+        "amount": "$5,000",
+        "body": "Refundable reservation deposit to secure your preferred unit and confirm your position within the development."
+      },
+      {
+        "stage_label": "Stage 02",
+        "title": "Contract",
+        "amount": "30%",
+        "body": "Payable upon signing the sale and purchase agreement. Formalises ownership rights and construction commitment."
+      },
+      {
+        "stage_label": "Stage 03",
+        "title": "Construction",
+        "amount": "30%",
+        "body": "Staged instalments aligned with verified construction milestones throughout the build period."
+      },
+      {
+        "stage_label": "Stage 04",
+        "title": "Completion",
+        "amount": "40%",
+        "body": "Final balance payable upon completion and handover. Keys released upon full clearance of outstanding amounts."
+      }
     ],
     "disclaimer": "* Prices and payment terms subject to change. Contact us for current pricing and availability. Flexible arrangements available for qualified buyers."
   },
-
   "faq": {
     "eyebrow": "Frequently Asked Questions",
     "headline": "Common questions",
     "items": [
-      { "question": "What type of home does Eden Ridge offer?", "answer": "<p>Eden Ridge is a collection of contemporary four-bedroom residences, each with private en-suite bathrooms, a walk-in wardrobe, and a private terrace off the master suite, arranged within a gated community in Community 25, Tema.</p>" },
-      { "question": "Where exactly is Eden Ridge located?", "answer": "<p>The development sits in Community 25, Tema, within Ghana's Eastern Corridor — roughly 50 miles from Accra's CBD and around 60 minutes from Kotoka International Airport, minutes from the Eastern Corridor Highway.</p>" },
-      { "question": "What is the payment structure?", "answer": "<p>Payment is staged across four points: a refundable $5,000 reservation deposit, 30% on contract signing, 30% through verified construction milestones, and the final 40% on completion and handover. Terms are subject to change — contact us for current details.</p>" },
-      { "question": "What amenities are included in the community?", "answer": "<p>Confirmed community amenities include a resort-style swimming pool, outdoor lounge areas, a fitness centre, secure gated access, a private clubhouse, children's recreation space, landscaped gardens, and shared utility infrastructure such as backup power and fibre internet readiness.</p>" },
-      { "question": "Is Eden Ridge suitable for diaspora or overseas investors?", "answer": "<p>Yes. The sales team welcomes enquiries from homebuyers, investors, and diaspora buyers globally, and can walk you through flexible payment options remotely.</p>" },
-      { "question": "How can I see the residence before construction is complete?", "answer": "<p>A curated video walkthrough of the full residence — living, dining, kitchen, bathroom, and beyond — is available on request. Contact our team to arrange a private viewing or receive the video tour.</p>" }
+      {
+        "question": "What type of home does Eden Ridge offer?",
+        "answer": "<p>Eden Ridge is a collection of contemporary four-bedroom residences, each with private en-suite bathrooms, a walk-in wardrobe, and a private terrace off the master suite, arranged within a gated community in Community 25, Tema.</p>"
+      },
+      {
+        "question": "Where exactly is Eden Ridge located?",
+        "answer": "<p>The development sits in Community 25, Tema, within Ghana's Eastern Corridor — roughly 50 miles from Accra's CBD and around 60 minutes from Kotoka International Airport, minutes from the Eastern Corridor Highway.</p>"
+      },
+      {
+        "question": "What is the payment structure?",
+        "answer": "<p>Payment is staged across four points: a refundable $5,000 reservation deposit, 30% on contract signing, 30% through verified construction milestones, and the final 40% on completion and handover. Terms are subject to change — contact us for current details.</p>"
+      },
+      {
+        "question": "What amenities are included in the community?",
+        "answer": "<p>Confirmed community amenities include a resort-style swimming pool, outdoor lounge areas, a fitness centre, secure gated access, a private clubhouse, children's recreation space, landscaped gardens, and shared utility infrastructure such as backup power and fibre internet readiness.</p>"
+      },
+      {
+        "question": "Is Eden Ridge suitable for diaspora or overseas investors?",
+        "answer": "<p>Yes. The sales team welcomes enquiries from homebuyers, investors, and diaspora buyers globally, and can walk you through flexible payment options remotely.</p>"
+      },
+      {
+        "question": "How can I see the residence before construction is complete?",
+        "answer": "<p>A curated video walkthrough of the full residence — living, dining, kitchen, bathroom, and beyond — is available on request. Contact our team to arrange a private viewing or receive the video tour.</p>"
+      }
     ]
   },
-
   "experience": {
     "eyebrow": "Experience Eden Ridge",
     "headline": "See it *in motion*",
@@ -328,16 +618,31 @@
     "cta_label": "Request the Video Tour",
     "align": "right"
   },
-
   "enquiry": {
     "eyebrow": "Make an Enquiry",
     "headline": "Register your interest",
     "body": "To arrange a private viewing, request a detailed information pack, or discuss flexible payment options, contact our sales team directly. We welcome enquiries from homebuyers, investors, and diaspora buyers globally.",
     "contact_items": [
-      { "type": "phone", "label": "Phone", "value": "+1 (404) 931-7171" },
-      { "type": "whatsapp", "label": "WhatsApp", "value": "+1 (404) 931-7171" },
-      { "type": "email", "label": "Email", "value": "edbenson11@outlook.com" },
-      { "type": "address", "label": "Location", "value": "Community 25, Tema, Greater Accra, Ghana" }
+      {
+        "type": "phone",
+        "label": "Phone",
+        "value": "+1 (404) 931-7171"
+      },
+      {
+        "type": "whatsapp",
+        "label": "WhatsApp",
+        "value": "+1 (404) 931-7171"
+      },
+      {
+        "type": "email",
+        "label": "Email",
+        "value": "edbenson11@outlook.com"
+      },
+      {
+        "type": "address",
+        "label": "Location",
+        "value": "Community 25, Tema, Greater Accra, Ghana"
+      }
     ],
     "form_title": "Request an information pack",
     "name_label": "Full Name",
@@ -345,35 +650,76 @@
     "phone_label": "Phone Number",
     "interest_label": "I'm Interested In",
     "message_label": "Message",
+    "interest_placeholder": "Select Option",
     "interest_options": [
-      { "label": "Purchasing a home" },
-      { "label": "Investment opportunity" },
-      { "label": "Requesting the video tour" },
-      { "label": "General information pack" }
+      {
+        "label": "Purchasing a home"
+      },
+      {
+        "label": "Investment opportunity"
+      },
+      {
+        "label": "General information pack"
+      }
     ],
     "submit_label": "Send Enquiry",
     "response_note": "We typically respond within one business day.",
     "success_message": "Thank you — your enquiry has reached our sales team. We typically respond within one business day."
   },
-
   "footer": {
     "logo_text": "EDEN RIDGE",
     "link_groups": [
-      { "heading": "Explore", "links": [
-        { "label": "About", "target": "#about" },
-        { "label": "Homes", "target": "#homes" },
-        { "label": "Floor Plans", "target": "#floorplans" },
-        { "label": "Gallery", "target": "#gallery" }
-      ]},
-      { "heading": "Development", "links": [
-        { "label": "Location", "target": "#location" },
-        { "label": "Amenities", "target": "#amenities" },
-        { "label": "Contact", "target": "#contact" }
-      ]},
-      { "heading": "Contact", "links": [
-        { "label": "edbenson11@outlook.com", "target": "mailto:edbenson11@outlook.com" },
-        { "label": "+1 (404) 931-7171", "target": "tel:+14049317171" }
-      ]}
+      {
+        "heading": "Explore",
+        "links": [
+          {
+            "label": "About",
+            "target": "#about"
+          },
+          {
+            "label": "Homes",
+            "target": "#homes"
+          },
+          {
+            "label": "Floor Plans",
+            "target": "#floorplans"
+          },
+          {
+            "label": "Gallery",
+            "target": "#gallery"
+          }
+        ]
+      },
+      {
+        "heading": "Development",
+        "links": [
+          {
+            "label": "Location",
+            "target": "#location"
+          },
+          {
+            "label": "Amenities",
+            "target": "#amenities"
+          },
+          {
+            "label": "Contact",
+            "target": "#contact"
+          }
+        ]
+      },
+      {
+        "heading": "Contact",
+        "links": [
+          {
+            "label": "edbenson11@outlook.com",
+            "target": "mailto:edbenson11@outlook.com"
+          },
+          {
+            "label": "+1 (404) 931-7171",
+            "target": "tel:+14049317171"
+          }
+        ]
+      }
     ],
     "show_socials": false,
     "copyright": "© {year} Eden Ridge. All rights reserved.",
@@ -381,8 +727,14 @@
     "disclaimer": "Disclaimer: Whilst every effort has been made to ensure the accuracy of the information contained on this website, it is intended as a guide only. The developer reserves the right to amend specifications, plans, and details as necessary and without prior notice. All images, renders, and illustrations are for indicative purposes only and may not represent the final product. Prices, availability, and payment terms are subject to change. Renders by Blueprint 3D Studios.",
     "show_legal_links": false,
     "legal_links": [
-      { "label": "Privacy", "target": "/privacy" },
-      { "label": "Terms", "target": "/terms" }
+      {
+        "label": "Privacy",
+        "target": "/privacy"
+      },
+      {
+        "label": "Terms",
+        "target": "/terms"
+      }
     ],
     "show_whatsapp_float": true
   }

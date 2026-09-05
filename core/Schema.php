@@ -348,6 +348,7 @@ final class Schema
                     ['key' => 'phone_label', 'type' => 'text', 'label' => 'Phone field label', 'max' => 24],
                     ['key' => 'interest_label', 'type' => 'text', 'label' => 'Interest field label', 'max' => 24],
                     ['key' => 'message_label', 'type' => 'text', 'label' => 'Message field label', 'max' => 24],
+                    ['key' => 'interest_placeholder', 'type' => 'text', 'label' => 'Interest placeholder', 'hint' => 'The unselected first entry in the dropdown. Leave empty to start on the first real option.', 'max' => 30],
                     ['key' => 'interest_options', 'type' => 'repeater', 'label' => 'Interest options', 'row_label' => 'label', 'fields' => [
                         ['key' => 'label', 'type' => 'text', 'label' => 'Option', 'max' => 46],
                     ]],
