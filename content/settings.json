@@ -23,6 +23,7 @@
   "social_youtube_url":      { "value": "", "type": "string" },
 
   "notification_emails":  { "value": "sales@edenridgegh.com, info@edenridgegh.com", "type": "string" },
+  "investor_emails":      { "value": "invest@edenridgegh.com", "type": "string" },
   "autoreply_enabled":    { "value": "1", "type": "bool" },
   "autoreply_subject":    { "value": "Thank you for your interest in Eden Ridge", "type": "string" },
   "autoreply_body":       { "value": "Dear {{name}},\n\nThank you for registering your interest in Eden Ridge — our gated collection of contemporary four-bedroom residences in Community 25, Tema.\n\nWe have received your enquiry regarding {{interest}} and a member of our sales team will be in touch within one business day.\n\nIn the meantime, feel free to reply to this email with any questions about the residence, the payment structure, or arranging a private viewing.\n\nWarm regards,\nThe Eden Ridge Sales Team", "type": "string" },

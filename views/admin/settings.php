@@ -54,6 +54,11 @@ use Core\{Csrf, Icons, Settings};
         <input type="text" id="notification_emails" name="notification_emails" value="<?= e((string)Settings::get('notification_emails', '')) ?>">
       </div>
       <div class="field">
+        <label class="field-label" for="investor_emails">Send investor enquiries to</label>
+        <p class="hint">Comma-separated. Anyone whose interest mentions <em>investment</em> goes here instead of the list above, and their automatic reply comes back to this inbox. Leave empty to send everything to the list above.</p>
+        <input type="text" id="investor_emails" name="investor_emails" value="<?= e((string)Settings::get('investor_emails', '')) ?>">
+      </div>
+      <div class="field">
         <input type="hidden" name="autoreply_enabled" value="0">
         <label class="switch">
           <input type="checkbox" name="autoreply_enabled" value="1" <?= Settings::bool('autoreply_enabled', true) ? 'checked' : '' ?>>

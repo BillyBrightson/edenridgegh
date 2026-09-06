@@ -780,7 +780,7 @@ $router->post('/settings', static function (): void {
     Csrf::verify();
     $strings = [
         'contact_phone', 'contact_whatsapp', 'contact_email', 'contact_address',
-        'notification_emails', 'autoreply_subject', 'autoreply_body',
+        'notification_emails', 'investor_emails', 'autoreply_subject', 'autoreply_body',
         'smtp_transport', 'smtp_host', 'smtp_encryption', 'smtp_username',
         'smtp_from_email', 'smtp_from_name', 'ga4_id', 'meta_pixel_id',
         'cookie_consent_text', 'turnstile_site_key', 'turnstile_secret',

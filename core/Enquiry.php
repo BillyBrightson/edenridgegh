@@ -171,7 +171,8 @@ final class Enquiry
         if (!$enquiry) {
             return;
         }
-        $recipients = array_filter(array_map('trim', explode(',', (string)Settings::get('notification_emails', ''))));
+        $investor   = self::isInvestor($enquiry);
+        $recipients = self::recipients($investor);
         $adminLink  = rtrim((string)Config::get('admin_url', ''), '/') . '/enquiries/' . $id;
 
         foreach ($recipients as $to) {
@@ -199,9 +200,42 @@ final class Enquiry
                 (string)$enquiry['email'],
                 $subject,
                 Mailer::render('enquiry_autoreply', ['enquiry' => $enquiry, 'body' => $body]),
-                (string)Settings::get('contact_email', '') ?: null
+                self::replyTo($investor)
             );
         }
+    }
+
+    /**
+     * Investor enquiries have their own inbox. Matching on the substring rather
+     * than the exact dropdown label keeps this working when the client rewords
+     * the option under Home page -> Enquiry form.
+     */
+    private static function isInvestor(array $enquiry): bool
+    {
+        return stripos((string)($enquiry['interest'] ?? ''), 'invest') !== false;
+    }
+
+    /** @return list<string> the inbox list for this enquiry, sales as the fallback */
+    private static function recipients(bool $investor): array
+    {
+        $list = $investor ? (string)Settings::get('investor_emails', '') : '';
+        if (trim($list) === '') {
+            $list = (string)Settings::get('notification_emails', '');
+        }
+        return array_values(array_filter(array_map('trim', explode(',', $list))));
+    }
+
+    /** Where a reply to the auto-reply should land. */
+    private static function replyTo(bool $investor): ?string
+    {
+        $candidates = $investor ? self::recipients(true) : [];
+        $candidates[] = (string)Settings::get('contact_email', '');
+        foreach ($candidates as $address) {
+            if (filter_var($address, FILTER_VALIDATE_EMAIL)) {
+                return $address;
+            }
+        }
+        return null;
     }
 
     // ------------------------------------------------------------------
