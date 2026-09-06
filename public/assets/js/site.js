@@ -404,10 +404,17 @@
   });
 
   /* -------------------------------------------------------- video gate */
-  var videoModal = document.getElementById('videoModal');
+  var videoModal  = document.getElementById('videoModal');
+  var playerModal = document.getElementById('videoPlayerModal');
+
+  var lastModalTrigger = null;
 
   function openModal(modal) {
     if (!modal) return;
+    if (document.activeElement && document.activeElement !== document.body) {
+      lastModalTrigger = document.activeElement;
+    }
+    modal.dataset.returnFocus = '1';
     modal.classList.add('open');
     modal.removeAttribute('aria-hidden');
     document.body.style.overflow = 'hidden';
@@ -420,6 +427,14 @@
     modal.classList.remove('open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (modal === playerModal) {
+      var frame = modal.querySelector('#videoFrame');
+      if (frame) frame.innerHTML = ''; // Stops playback.
+    }
+    if (modal.dataset.returnFocus === '1') {
+      delete modal.dataset.returnFocus;
+      if (lastModalTrigger && document.contains(lastModalTrigger)) lastModalTrigger.focus();
+    }
   }
 
   document.querySelectorAll('[data-video-request]').forEach(function (btn) {
@@ -430,21 +445,26 @@
     });
   });
 
-  if (videoModal) {
-    videoModal.addEventListener('click', function (e) {
-      if (e.target === videoModal || e.target.hasAttribute('data-modal-close')) closeModal(videoModal);
+  [videoModal, playerModal].forEach(function (modal) {
+    if (!modal) return;
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal || e.target.hasAttribute('data-modal-close')) closeModal(modal);
     });
-    videoModal.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeModal(videoModal);
-      if (e.key === 'Tab') trapFocus(videoModal, e);
+    modal.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal(modal);
+      if (e.key === 'Tab') trapFocus(modal, e);
     });
-  }
+  });
 
+  /**
+   * Build the player on demand and open it over the page. Closing the modal
+   * removes the iframe, which is the only reliable way to stop playback
+   * without talking to each provider's own JS API.
+   */
   function revealVideo(url) {
     var frame = document.getElementById('videoFrame');
     closeModal(videoModal);
     if (!frame || !url) return;
-    frame.hidden = false;
     frame.innerHTML = '';
     var iframe = document.createElement('iframe');
     iframe.src = url;
@@ -452,8 +472,12 @@
     iframe.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
     iframe.allowFullscreen = true;
     frame.appendChild(iframe);
-    frame.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
-    track('video_request', {});
+    if (playerModal) {
+      openModal(playerModal);
+    } else {
+      frame.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+    }
+    track('video_play', {});
   }
 
   // Poster facade: load the third-party player only once the visitor asks.

@@ -18,17 +18,25 @@ $hasVideo  = $videoUrl !== '';
         <?php if ($hasVideo && $gated): ?>
           <button type="button" class="btn btn-primary" data-video-request><?= e($c['cta_label'] ?? '') ?></button>
         <?php elseif ($hasVideo): ?>
-          <button type="button" class="btn btn-primary" data-video-play="<?= e($videoUrl) ?>"><?= e($c['cta_label'] ?? '') ?></button>
+          <button type="button" class="btn btn-primary btn-play" data-video-play="<?= e($videoUrl) ?>"><?= e($c['cta_label'] ?? '') ?></button>
         <?php else: ?>
           <a href="#contact" class="btn btn-primary"><?= e($c['cta_label'] ?? '') ?></a>
         <?php endif; ?>
       </div>
-      <?php if ($hasVideo): ?>
-        <div class="video-frame" id="videoFrame" hidden></div>
-      <?php endif; ?>
     </div>
   </div>
 </section>
+
+<?php if ($hasVideo): ?>
+<?php /* The player lives in a modal, so the walkthrough opens over the page
+   rather than squeezing into the band. The iframe is only built on click and is
+   torn down on close, which keeps the third-party player off first paint and
+   stops the audio the moment the visitor dismisses it. */ ?>
+<div class="modal modal-video" id="videoPlayerModal" role="dialog" aria-modal="true" aria-label="Eden Ridge video walkthrough" aria-hidden="true">
+  <button class="modal-close" type="button" data-modal-close aria-label="Close">&times;</button>
+  <div class="video-frame" id="videoFrame"></div>
+</div>
+<?php endif; ?>
 
 <?php if ($hasVideo && $gated): ?>
 <div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle" aria-hidden="true">

@@ -486,6 +486,23 @@ select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
 .modal-card p.modal-lede{margin-top:10px; color:var(--ink-soft); font-size:14.5px; line-height:1.7;}
 .modal-close{position:absolute; top:24px; right:24px; width:44px; height:44px; border-radius:var(--radius-round); border:1px solid var(--line-glass-strong); background:none; color:var(--paper-soft); font-size:18px; cursor:pointer;}
 
+/* ---- modal (video player) ---- */
+.modal-video{padding:24px;}
+/* Cap the width by the viewport height too, so the 16:9 frame never runs off
+   the bottom on a short or landscape screen. */
+.modal-video .video-frame{
+  margin-top:0; width:100%; max-width:min(1120px, calc((100vh - 110px) * 16 / 9));
+  border-radius:var(--radius); overflow:hidden; background:#000;
+}
+.modal-video .video-frame iframe{object-fit:contain;}
+
+/* the CTA now plays rather than requests, so it wears a play glyph */
+.btn-play::before{
+  content:''; display:inline-block; margin-right:11px; vertical-align:-1px;
+  border-style:solid; border-width:5px 0 5px 8px;
+  border-color:transparent transparent transparent currentColor;
+}
+
 /* ---- forms: validation, busy and success states ---- */
 .form-row.has-error input, .form-row.has-error select, .form-row.has-error textarea{border-color:var(--brass);}
 .field-error{display:block; margin-top:7px; font-size:12px; color:var(--brass); letter-spacing:.02em; text-transform:none;}

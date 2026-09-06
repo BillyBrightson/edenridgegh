@@ -54,9 +54,9 @@
 
   "whatsapp_webhook_url": { "value": "", "type": "string" },
 
-  "video_gate_enabled":   { "value": "1", "type": "bool" },
+  "video_gate_enabled":   { "value": "0", "type": "bool" },
   "video_provider":       { "value": "youtube", "type": "string" },
-  "video_url":            { "value": "", "type": "string" },
+  "video_url":            { "value": "https://youtu.be/7r7-EbLE1Ss", "type": "string" },
   "video_poster_media_id":{ "value": "", "type": "string" },
   "video_email_body":     { "value": "Dear {{name}},\n\nThank you for requesting the Eden Ridge video walkthrough. You can watch the full tour here:\n\n{{video_url}}\n\nIf you would like to arrange a private viewing or discuss the payment structure, simply reply to this email.\n\nWarm regards,\nThe Eden Ridge Sales Team", "type": "string" },
 
