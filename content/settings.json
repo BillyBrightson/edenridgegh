@@ -20,7 +20,7 @@
   "social_linkedin_handle":  { "value": "@edenridgegh", "type": "string" },
   "social_linkedin_url":     { "value": "", "type": "string" },
   "social_youtube_handle":   { "value": "@edenridgegh", "type": "string" },
-  "social_youtube_url":      { "value": "", "type": "string" },
+  "social_youtube_url":      { "value": "https://www.youtube.com/@edenridgegh", "type": "string" },
 
   "notification_emails":  { "value": "sales@edenridgegh.com, info@edenridgegh.com", "type": "string" },
   "investor_emails":      { "value": "invest@edenridgegh.com", "type": "string" },
