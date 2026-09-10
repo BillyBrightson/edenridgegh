@@ -721,7 +721,7 @@
         ]
       }
     ],
-    "show_socials": false,
+    "show_socials": true,
     "copyright": "© {year} Eden Ridge. All rights reserved.",
     "address_line": "Community 25 · Tema · Greater Accra · Ghana",
     "disclaimer": "Disclaimer: Whilst every effort has been made to ensure the accuracy of the information contained on this website, it is intended as a guide only. The developer reserves the right to amend specifications, plans, and details as necessary and without prior notice. All images, renders, and illustrations are for indicative purposes only and may not represent the final product. Prices, availability, and payment terms are subject to change. Renders by Blueprint 3D Studios.",
