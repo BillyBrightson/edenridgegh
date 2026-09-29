@@ -288,7 +288,7 @@ final class Schema
                         ['key' => 'stage_label', 'type' => 'text', 'label' => 'Stage label', 'max' => 16],
                         ['key' => 'title', 'type' => 'text', 'label' => 'Title', 'max' => 24],
                         ['key' => 'amount', 'type' => 'text', 'label' => 'Amount', 'max' => 14],
-                        ['key' => 'body', 'type' => 'textarea', 'label' => 'Body', 'rows' => 3, 'max' => 200],
+                        ['key' => 'body', 'type' => 'textarea', 'label' => 'Body', 'rows' => 5, 'max' => 1000],
                     ]],
                     ['key' => 'disclaimer', 'type' => 'textarea', 'label' => 'Disclaimer', 'rows' => 3],
                 ],
