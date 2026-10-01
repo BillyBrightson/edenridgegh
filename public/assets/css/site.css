@@ -276,20 +276,23 @@ section{position:relative;}
 @media (max-width:860px){ .plan-panel.active{grid-template-columns:1fr;} .plan-details{padding:34px 24px;} }
 
 /* ---- plans: two-image variant ----
-   A plan panel with a right-image set drops the grid and stacks: a two-column
-   image row above, a padded blurb with an optional button below. .plan-panel
-   is a `display:grid` with two columns on larger screens, so we override it
-   to one column here and let .plan-images own the two-column layout. */
+   A plan panel with a right-image set stacks: a centred title at the top, a
+   two-column image row in the middle, a centred blurb with an optional button
+   beneath. .plan-panel is a `display:grid` with two columns on larger screens,
+   so we override it to one column here and let .plan-images own its own
+   two-column layout. */
 .plan-panel.plan-panel-two.active{grid-template-columns:1fr;}
+.plan-head{padding:40px 44px 24px; text-align:center; color:var(--paper-warm);}
+.plan-head h3{font-size:26px; color:var(--paper);}
+.plan-head .sub{color:var(--brass-soft); font-size:13px; letter-spacing:.05em; text-transform:uppercase; margin-top:6px;}
 .plan-images{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line-on-light);}
 .plan-images .plan-img-wrap{padding:26px;}
-.plan-blurb{padding:40px 44px; color:var(--paper-warm); border-top:1px solid var(--line-on-light);}
-.plan-blurb h3{font-size:26px; color:var(--paper);}
-.plan-blurb .sub{color:var(--brass-soft); font-size:13px; letter-spacing:.05em; text-transform:uppercase; margin-top:6px;}
-.plan-blurb p{margin-top:18px; max-width:70ch; font-size:14.5px; line-height:1.8; color:var(--sand);}
+.plan-blurb{padding:40px 44px; color:var(--paper-warm); text-align:center;}
+.plan-blurb p{margin:0 auto; max-width:70ch; font-size:14.5px; line-height:1.8; color:var(--sand);}
 .plan-blurb .btn{margin-top:24px;}
 @media (max-width:860px){
   .plan-panel.plan-panel-two.active{grid-template-columns:1fr;}
+  .plan-head{padding:30px 24px 18px;}
   .plan-images{grid-template-columns:1fr;}
   .plan-blurb{padding:30px 24px;}
 }

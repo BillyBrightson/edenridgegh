@@ -35,6 +35,12 @@ $plans = rows($c, 'plans');
       <?php if ($twoImage): ?>
         <div class="plan-panel plan-panel-two<?= $i === 0 ? ' active' : '' ?> reveal" id="plan-<?= $i ?>"
              role="tabpanel" aria-labelledby="plan-tab-<?= $i ?>"<?= $i === 0 ? '' : ' hidden' ?>>
+          <?php if ($title !== '' || $subtitle !== ''): ?>
+            <div class="plan-head">
+              <?php if ($title !== ''): ?><h3><?= e($title) ?></h3><?php endif; ?>
+              <?php if ($subtitle !== ''): ?><div class="sub"><?= e($subtitle) ?></div><?php endif; ?>
+            </div>
+          <?php endif; ?>
           <div class="plan-images">
             <?php foreach (['image' => 'left', 'image_right' => 'right'] as $key => $side): ?>
               <div class="plan-img-wrap">
@@ -52,14 +58,12 @@ $plans = rows($c, 'plans');
             <?php endforeach; ?>
           </div>
           <?php
-            $blurb       = (string)($plan['blurb'] ?? '');
-            $buttonLabel = trim((string)($plan['button_label'] ?? ''));
+            $blurb        = (string)($plan['blurb'] ?? '');
+            $buttonLabel  = trim((string)($plan['button_label'] ?? ''));
             $buttonTarget = trim((string)($plan['button_target'] ?? ''));
           ?>
           <?php if ($blurb !== '' || $buttonLabel !== ''): ?>
             <div class="plan-blurb">
-              <?php if ($title !== ''): ?><h3><?= e($title) ?></h3><?php endif; ?>
-              <?php if ($subtitle !== ''): ?><div class="sub"><?= e($subtitle) ?></div><?php endif; ?>
               <?php if ($blurb !== ''): ?><p><?= para($blurb) ?></p><?php endif; ?>
               <?php if ($buttonLabel !== ''): ?>
                 <a class="btn btn-primary" href="<?= e($buttonTarget !== '' ? $buttonTarget : '#contact') ?>"><?= e($buttonLabel) ?></a>
