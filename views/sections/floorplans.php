@@ -41,19 +41,30 @@ $plans = rows($c, 'plans');
               <?php if ($subtitle !== ''): ?><div class="sub"><?= e($subtitle) ?></div><?php endif; ?>
             </div>
           <?php endif; ?>
+          <?php
+            $imagePairs = [
+                'left'  => ['image' => $plan['image'] ?? null,       'label' => (string)($plan['image_label'] ?? '')],
+                'right' => ['image' => $plan['image_right'] ?? null, 'label' => (string)($plan['image_right_label'] ?? '')],
+            ];
+          ?>
           <div class="plan-images">
-            <?php foreach (['image' => 'left', 'image_right' => 'right'] as $key => $side): ?>
-              <div class="plan-img-wrap">
-                <?php /* Eager: .plan-img-wrap sizes these with width:auto, so a lazy
-                         image would have no box to intersect and would never load. */ ?>
-                <?= Media::img($plan[$key] ?? null, [
-                    'sizes'   => '(max-width: 860px) 100vw, 45vw',
-                    'loading' => 'eager',
-                    'data'    => [
-                        'lightbox'         => Media::url($plan[$key] ?? null, 1920),
-                        'lightbox-caption' => trim($title . ' — ' . $subtitle, ' —'),
-                    ],
-                ]) ?>
+            <?php foreach ($imagePairs as $side => $pair): ?>
+              <div class="plan-img-column">
+                <?php if ($pair['label'] !== ''): ?>
+                  <h4 class="plan-img-label"><?= e($pair['label']) ?></h4>
+                <?php endif; ?>
+                <div class="plan-img-wrap">
+                  <?php /* Eager: .plan-img-wrap sizes these with width:auto, so a lazy
+                           image would have no box to intersect and would never load. */ ?>
+                  <?= Media::img($pair['image'], [
+                      'sizes'   => '(max-width: 860px) 100vw, 45vw',
+                      'loading' => 'eager',
+                      'data'    => [
+                          'lightbox'         => Media::url($pair['image'], 1920),
+                          'lightbox-caption' => trim(($pair['label'] !== '' ? $pair['label'] : $title) . ' — ' . $subtitle, ' —'),
+                      ],
+                  ]) ?>
+                </div>
               </div>
             <?php endforeach; ?>
           </div>
