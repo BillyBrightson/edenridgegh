@@ -22,39 +22,86 @@ $plans = rows($c, 'plans');
     </div>
 
     <?php foreach ($plans as $i => $plan): ?>
-      <div class="plan-panel<?= $i === 0 ? ' active' : '' ?> reveal" id="plan-<?= $i ?>"
-           role="tabpanel" aria-labelledby="plan-tab-<?= $i ?>"<?= $i === 0 ? '' : ' hidden' ?>>
-        <div class="plan-img-wrap">
-          <?php /* Eager: .plan-img-wrap sizes these with width:auto, so a lazy
-                   image would have no box to intersect and would never load. */ ?>
-          <?= Media::img($plan['image'] ?? null, [
-              'sizes'   => '(max-width: 860px) 100vw, 55vw',
-              'loading' => 'eager',
-              'data'  => [
-                  'lightbox' => Media::url($plan['image'] ?? null, 1920),
-                  'lightbox-caption' => trim(($plan['title'] ?? '') . ' — ' . ($plan['subtitle'] ?? ''), ' —'),
-              ],
-          ]) ?>
-        </div>
-        <div class="plan-details">
-          <h3><?= e($plan['title'] ?? '') ?></h3>
-          <?php if (($plan['subtitle'] ?? '') !== ''): ?><div class="sub"><?= e($plan['subtitle']) ?></div><?php endif; ?>
-          <hr class="rule">
-          <table class="plan-table">
-            <caption class="sr-only"><?= e(($plan['title'] ?? '') . ' schedule of areas') ?></caption>
-            <tbody>
-            <?php foreach (rows($plan, 'rows') as $row): ?>
-              <tr>
-                <td><?= !empty($row['is_total']) ? '<strong>' . e($row['label'] ?? '') . '</strong>' : e($row['label'] ?? '') ?></td>
-                <td><?= !empty($row['is_total']) ? '<strong>' . e($row['value'] ?? '') . '</strong>' : e($row['value'] ?? '') ?></td>
-              </tr>
+      <?php
+        // A second image switches the panel to a two-image layout: both plans
+        // side by side with a short blurb and optional button beneath, in
+        // place of the schedule table. Any plan with no second image keeps
+        // the original image-and-table layout exactly as it was.
+        $twoImage = !empty($plan['image_right']);
+        $title    = (string)($plan['title'] ?? '');
+        $subtitle = (string)($plan['subtitle'] ?? '');
+      ?>
+
+      <?php if ($twoImage): ?>
+        <div class="plan-panel plan-panel-two<?= $i === 0 ? ' active' : '' ?> reveal" id="plan-<?= $i ?>"
+             role="tabpanel" aria-labelledby="plan-tab-<?= $i ?>"<?= $i === 0 ? '' : ' hidden' ?>>
+          <div class="plan-images">
+            <?php foreach (['image' => 'left', 'image_right' => 'right'] as $key => $side): ?>
+              <div class="plan-img-wrap">
+                <?php /* Eager: .plan-img-wrap sizes these with width:auto, so a lazy
+                         image would have no box to intersect and would never load. */ ?>
+                <?= Media::img($plan[$key] ?? null, [
+                    'sizes'   => '(max-width: 860px) 100vw, 45vw',
+                    'loading' => 'eager',
+                    'data'    => [
+                        'lightbox'         => Media::url($plan[$key] ?? null, 1920),
+                        'lightbox-caption' => trim($title . ' — ' . $subtitle, ' —'),
+                    ],
+                ]) ?>
+              </div>
             <?php endforeach; ?>
-            </tbody>
-          </table>
-          <?php if (($plan['note'] ?? '') !== ''): ?><p class="plan-note"><?= para($plan['note']) ?></p><?php endif; ?>
-          <?php if (($plan['cta_text'] ?? '') !== ''): ?><div class="plan-dl"><?= e($plan['cta_text']) ?></div><?php endif; ?>
+          </div>
+          <?php
+            $blurb       = (string)($plan['blurb'] ?? '');
+            $buttonLabel = trim((string)($plan['button_label'] ?? ''));
+            $buttonTarget = trim((string)($plan['button_target'] ?? ''));
+          ?>
+          <?php if ($blurb !== '' || $buttonLabel !== ''): ?>
+            <div class="plan-blurb">
+              <?php if ($title !== ''): ?><h3><?= e($title) ?></h3><?php endif; ?>
+              <?php if ($subtitle !== ''): ?><div class="sub"><?= e($subtitle) ?></div><?php endif; ?>
+              <?php if ($blurb !== ''): ?><p><?= para($blurb) ?></p><?php endif; ?>
+              <?php if ($buttonLabel !== ''): ?>
+                <a class="btn btn-primary" href="<?= e($buttonTarget !== '' ? $buttonTarget : '#contact') ?>"><?= e($buttonLabel) ?></a>
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
         </div>
-      </div>
+      <?php else: ?>
+        <div class="plan-panel<?= $i === 0 ? ' active' : '' ?> reveal" id="plan-<?= $i ?>"
+             role="tabpanel" aria-labelledby="plan-tab-<?= $i ?>"<?= $i === 0 ? '' : ' hidden' ?>>
+          <div class="plan-img-wrap">
+            <?php /* Eager: .plan-img-wrap sizes these with width:auto, so a lazy
+                     image would have no box to intersect and would never load. */ ?>
+            <?= Media::img($plan['image'] ?? null, [
+                'sizes'   => '(max-width: 860px) 100vw, 55vw',
+                'loading' => 'eager',
+                'data'  => [
+                    'lightbox' => Media::url($plan['image'] ?? null, 1920),
+                    'lightbox-caption' => trim($title . ' — ' . $subtitle, ' —'),
+                ],
+            ]) ?>
+          </div>
+          <div class="plan-details">
+            <h3><?= e($title) ?></h3>
+            <?php if ($subtitle !== ''): ?><div class="sub"><?= e($subtitle) ?></div><?php endif; ?>
+            <hr class="rule">
+            <table class="plan-table">
+              <caption class="sr-only"><?= e($title . ' schedule of areas') ?></caption>
+              <tbody>
+              <?php foreach (rows($plan, 'rows') as $row): ?>
+                <tr>
+                  <td><?= !empty($row['is_total']) ? '<strong>' . e($row['label'] ?? '') . '</strong>' : e($row['label'] ?? '') ?></td>
+                  <td><?= !empty($row['is_total']) ? '<strong>' . e($row['value'] ?? '') . '</strong>' : e($row['value'] ?? '') ?></td>
+                </tr>
+              <?php endforeach; ?>
+              </tbody>
+            </table>
+            <?php if (($plan['note'] ?? '') !== ''): ?><p class="plan-note"><?= para($plan['note']) ?></p><?php endif; ?>
+            <?php if (($plan['cta_text'] ?? '') !== ''): ?><div class="plan-dl"><?= e($plan['cta_text']) ?></div><?php endif; ?>
+          </div>
+        </div>
+      <?php endif; ?>
     <?php endforeach; ?>
   </div>
 </section>

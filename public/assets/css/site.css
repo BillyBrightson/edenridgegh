@@ -275,6 +275,25 @@ section{position:relative;}
 .plan-dl{display:inline-flex; gap:8px; align-items:center; margin-top:26px; font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--brass-soft); border:1px solid var(--line-on-dark); padding:12px 22px; border-radius:var(--radius);}
 @media (max-width:860px){ .plan-panel.active{grid-template-columns:1fr;} .plan-details{padding:34px 24px;} }
 
+/* ---- plans: two-image variant ----
+   A plan panel with a right-image set drops the grid and stacks: a two-column
+   image row above, a padded blurb with an optional button below. .plan-panel
+   is a `display:grid` with two columns on larger screens, so we override it
+   to one column here and let .plan-images own the two-column layout. */
+.plan-panel.plan-panel-two.active{grid-template-columns:1fr;}
+.plan-images{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line-on-light);}
+.plan-images .plan-img-wrap{padding:26px;}
+.plan-blurb{padding:40px 44px; color:var(--paper-warm); border-top:1px solid var(--line-on-light);}
+.plan-blurb h3{font-size:26px; color:var(--paper);}
+.plan-blurb .sub{color:var(--brass-soft); font-size:13px; letter-spacing:.05em; text-transform:uppercase; margin-top:6px;}
+.plan-blurb p{margin-top:18px; max-width:70ch; font-size:14.5px; line-height:1.8; color:var(--sand);}
+.plan-blurb .btn{margin-top:24px;}
+@media (max-width:860px){
+  .plan-panel.plan-panel-two.active{grid-template-columns:1fr;}
+  .plan-images{grid-template-columns:1fr;}
+  .plan-blurb{padding:30px 24px;}
+}
+
 /* AMENITIES */
 .amenity-grid{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line-on-light);}
 .amenity-item{display:flex; gap:22px; padding:36px 6px; border-bottom:1px solid var(--line-on-light); border-right:1px solid var(--line-on-light);}
